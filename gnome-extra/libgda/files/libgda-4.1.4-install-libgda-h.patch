@@ -1,0 +1,21 @@
+From 342b5fdef11e4894e975df5563ab24ac66cf899a Mon Sep 17 00:00:00 2001
+From: Vivien Malerba <malerba@gnome-db.org>
+Date: Tue, 19 Jan 2010 20:56:02 +0000
+Subject: Correctly install libgda.h, bug #607357
+
+---
+diff --git a/libgda/Makefile.am b/libgda/Makefile.am
+index e3ea991..8da4548 100644
+--- a/libgda/Makefile.am
++++ b/libgda/Makefile.am
+@@ -247,7 +247,7 @@ uninstall-def-files:
+ endif
+ 
+ gdaincludedir=$(includedir)/libgda-$(GDA_ABI_MAJOR_VERSION).$(GDA_ABI_MINOR_VERSION)/libgda
+-gdainclude_HEADERS=$(libgda_built_headers) $(gda_headers)
++gdainclude_HEADERS=$(libgda_built_headers) $(gda_headers) libgda.h
+ 
+ CLEANFILES = $(libgda_built_headers) $(libgda_built_cfiles) \
+ 	gda-marshal.c \
+--
+cgit v0.8.3.1
