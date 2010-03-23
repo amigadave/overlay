@@ -26,17 +26,9 @@ DEPEND="${RDEPEND}
 	doc? ( >=dev-util/gtk-doc-1.4 )"
 
 DOCS="AUTHORS ChangeLog NEWS README"
-G2CONF="${G2CONF} --disable-static"
 
 # FIXME: 2 out of 16 tests fail, upstream bug #578792
 RESTRICT="test"
-
-src_prepare() {
-	gnome2_src_prepare
-
-	# Fix intltoolize broken file, see upstream #577133
-	sed "s:'\^\$\$lang\$\$':\^\$\$lang\$\$:g" -i po/Makefile.in.in || die "sed failed"
-}
 
 src_test() {
 	unset DBUS_SYSTEM_BUS_ADDRESS
