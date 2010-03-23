@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>no-herd</herd>
+	<upstream>
+		<maintainer status="active">
+			<name>David King</name>
+			<email>davidk@openismus.com</email>
+		</maintainer>
+	</upstream>
+	<longdescription lang="en">
+	A Qt application to view Glom databases, using libglom, the non-UI
+	component of Glom.
+	</longdescription>
+	<use>
+		<flag name="postgres">
+		Run-time depend on <pkg>dev-db/postgresql</pkg> database support in
+		<pkg>x11-libs/qt-sql</pkg>.
+		</flag>
+		<flag name="sqlite">
+		Run-time depend on <pkg>dev-db/sqlite</pkg> database support in
+		<pkg>x11-libs/qt-sql</pkg>.
+		</flag>
+	</use>
+</pkgmetadata>
+
