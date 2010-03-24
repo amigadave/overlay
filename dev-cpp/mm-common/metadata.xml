@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>no-herd</herd>
+	<upstream>
+		<maintainer status="active">
+			<name>Daniel Elstner</name>
+			<email>daniel.kitta@gmail.com</email>
+		</maintainer>
+		<bugs-to>
+		https://bugzilla.gnome.org/enter_bug.cgi?product=mm-common
+		</bugs-to>
+	</upstream>
+	<longdescription lang="en">
+	The mm-common module provides the build infrastructure and utilities
+	shared among the GNOME C++ binding libraries.  It is only a required
+	dependency for building the C++ bindings from the gnome.org version
+	control repository.  An installation of mm-common is not required for
+	building tarball releases, unless configured to use maintainer-mode.
+	</longdescription>
+	<use>
+		<flag name="download-doctags">
+		Download the latest libstdc++ doctags file, rather than using the
+		bundled version.
+		</flag>
+	</use>
+</pkgmetadata>
+
