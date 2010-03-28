@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <herd>no-herd</herd>
+    <maintainer>
+        <email>eva@gentoo.org</email>
+    </maintainer>
+	<longdescription>
+	GooCanvas is similar in many ways to GnomeCanvas and FooCanvas. But it uses
+	cairo for rendering, has an optional model/view split, and uses interfaces
+	for items &amp; models (so you can easily turn any application object into a
+	canvas item or model).
+	</longdescription>
+</pkgmetadata>
