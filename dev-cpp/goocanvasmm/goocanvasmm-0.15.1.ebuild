@@ -7,7 +7,7 @@ EAPI="2"
 inherit gnome2
 
 DESCRIPTION="C++ bindings for goocanvas"
-HOMEPAGE="http://www.gtkmm.org"
+HOMEPAGE="http://www.gtkmm.org/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
