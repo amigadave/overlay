@@ -26,16 +26,16 @@ src_install() {
 	dodoc debian/changelog FAQ README THANKS TODO || die "dodoc failed"
 	doman dcut.1 dput.1 || die "doman failed"
 	# Work around doman change in Gentoo bug #222439.
-	insinto ${EPREFIX}/usr/share/man/man5
+	insinto "${EPREFIX}"/usr/share/man/man5
 	doins dput.cf.5 || die "doins dput.cf.5 failed"
 	dobashcompletion bash_completion dput
 	dobin dput dcut || die "dobin failed"
-	insinto ${EPREFIX}/etc
+	insinto "${EPREFIX}"/etc
 	doins dput.cf || die "doinc dput.cf failed"
-	insinto ${EPREFIX}/usr/share/${PN}
+	insinto "${EPREFIX}"/usr/share/${PN}
 	doins ftp.py http.py https.py scp.py local.py rsync.py \
 		|| die "doin python modules failed"
-	insinto ${EPREFIX}/usr/share/${PN}/helper
+	insinto "${EPREFIX}"/usr/share/${PN}/helper
 	doins dputhelper.py security-warning \
 		|| die "doins python helper modules failed"
 }
