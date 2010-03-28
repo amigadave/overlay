@@ -4,8 +4,8 @@
 	<herd>gnome</herd>
 	<upstream>
 		<maintainer status="active">
-			<name>Murray Cumming</name>
 			<email>murrayc@murrayc.com</email>
+			<name>Murray Cumming</name>
 		</maintainer>
 		<bugs-to>
 			https://bugzilla.gnome.org/enter_bug.cgi?product=gnomemm
