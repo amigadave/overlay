@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit git
+inherit base fdo-mime git
 
 DESCRIPTION="A Qt application to view Glom databases"
 HOMEPAGE="http://gitorious.org/qlom"
@@ -25,9 +25,18 @@ RDEPEND="dev-db/glom
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
-DOCS="AUTHORS NEWS README"
+DOCS=( "AUTHORS" "NEWS" "README" )
 
 src_install() {
-	emake DESTDIR="${D}" install || die "install failed"
-	dodoc ${DOCS}
+	base_src_install
+}
+
+pkg_postinst() {
+	fdo-mime_mime_database_update
+	fdo-mime_desktop_database_update
+}
+
+pkg_postrm() {
+	fdo-mime_desktop_database_update
+	fdo-mime_mime_database_update
 }

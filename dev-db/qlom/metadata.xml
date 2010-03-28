@@ -4,8 +4,8 @@
 	<herd>no-herd</herd>
 	<upstream>
 		<maintainer status="active">
-			<name>David King</name>
 			<email>davidk@openismus.com</email>
+			<name>David King</name>
 		</maintainer>
 	</upstream>
 	<longdescription lang="en">
