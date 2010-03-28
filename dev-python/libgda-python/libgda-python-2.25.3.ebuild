@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI="2"
+
 G_PY_PN="gnome-python-extras"
 G_PY_BINDINGS="gda"
 
