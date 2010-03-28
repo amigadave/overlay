@@ -10,7 +10,7 @@ PYTHON_DEPEND="*:2.4"
 inherit bash-completion python
 
 DESCRIPTION="The Debian Package Upload Tool"
-HOMEPAGE="http://git.debian.org/?p=collab-maint/dput.git"
+HOMEPAGE="http://packages.qa.debian.org/d/dput.html"
 SRC_URI="mirror://debian/pool/main/d/dput/dput_${PV}.tar.gz"
 
 LICENSE="GPL-2"
