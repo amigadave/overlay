@@ -20,7 +20,7 @@ DEPEND="app-text/dblatex
 	dev-libs/libxslt
 	media-gfx/graphviz
 	www-client/elinks"
-RDEPEND=""
+RDEPEND=">=dev-util/debhelper-5.0.30"
 
 DOCS=( "doc/cdbs-doc.pdf" "debian/changelog" )
 HTML_DOCS=( "doc/cdbs-doc.html" "doc/buildcore.png" "doc/depgraph.png"
