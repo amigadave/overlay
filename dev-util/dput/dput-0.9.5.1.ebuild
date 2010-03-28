@@ -23,17 +23,19 @@ RDEPEND="app-crypt/gnupg
 	>=dev-lang/python-2.3"
 
 src_install() {
-	dodoc debian/changelog FAQ README THANKS TODO
-	doman dcut.1 dput.1
+	dodoc debian/changelog FAQ README THANKS TODO || die "dodoc failed"
+	doman dcut.1 dput.1 || die "doman failed"
 	# Work around doman change in Gentoo bug #222439.
 	insinto ${EPREFIX}/usr/share/man/man5
-	doins dput.cf.5
+	doins dput.cf.5 || die "doins dput.cf.5 failed"
 	dobashcompletion bash_completion dput
-	dobin dput dcut
+	dobin dput dcut || die "dobin failed"
 	insinto ${EPREFIX}/etc
-	doins dput.cf
+	doins dput.cf || die "doinc dput.cf failed"
 	insinto ${EPREFIX}/usr/share/${PN}
-	doins ftp.py http.py https.py scp.py local.py rsync.py
+	doins ftp.py http.py https.py scp.py local.py rsync.py \
+		|| die "doin python modules failed"
 	insinto ${EPREFIX}/usr/share/${PN}/helper
-	doins dputhelper.py security-warning
+	doins dputhelper.py security-warning \
+		|| die "doins python helper modules failed"
 }
