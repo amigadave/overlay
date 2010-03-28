@@ -4,8 +4,8 @@
 	<herd>no-herd</herd>
 	<upstream>
 		<maintainer status="active">
-			<name>Daniel Elstner</name>
 			<email>daniel.kitta@gmail.com</email>
+			<name>Daniel Elstner</name>
 		</maintainer>
 		<bugs-to>
 		https://bugzilla.gnome.org/enter_bug.cgi?product=mm-common
@@ -18,11 +18,5 @@
 	control repository.  An installation of mm-common is not required for
 	building tarball releases, unless configured to use maintainer-mode.
 	</longdescription>
-	<use>
-		<flag name="download-doctags">
-		Download the latest libstdc++ doctags file, rather than using the
-		bundled version.
-		</flag>
-	</use>
 </pkgmetadata>
 
