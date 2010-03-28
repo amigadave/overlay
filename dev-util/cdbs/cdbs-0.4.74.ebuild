@@ -7,7 +7,7 @@ EAPI="2"
 inherit base
 
 DESCRIPTION="The Common Debian Build System"
-HOMEPAGE="http://git.debian.org/?p=collab-maint/cdbs.git;a=summary"
+HOMEPAGE="http://packages.qa.debian.org/c/cdbs.html"
 SRC_URI="mirror://debian/pool/main/c/cdbs/cdbs_${PV}.tar.gz"
 
 LICENSE="GPL-2"
