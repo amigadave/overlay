@@ -4,8 +4,8 @@
 	<herd>no-herd</herd>
 	<upstream>
 		<maintainer status="active">
-			<name>Jonas Smedegaard</name>
 			<email>dr@jones.dk</email>
+			<name>Jonas Smedegaard</name>
 		</maintainer>
 		<bugs-to>http://bugs.debian.org/cdbs</bugs-to>
 	</upstream>
