@@ -4,8 +4,8 @@
 	<herd>gnome</herd>
 	<upstream>
 		<maintainer status="active">
-			<name>Murray Cumming</name>
 			<email>murrayc@murrayc.com</email>
+			<name>Murray Cumming</name>
 		</maintainer>
 		<bugs-to>http://bugzilla.gnome.org/enter_bug.cgi?product=Glom</bugs-to>
 		<doc lang="en">http://library.gnome.org/users/glom/index.html.en</doc>
@@ -15,7 +15,7 @@
 		<doc lang="de">http://library.gnome.org/users/glom/index.html.de</doc>
 		<doc lang="es">http://library.gnome.org/users/glom/index.html.es</doc>
 		<doc lang="fr">http://library.gnome.org/users/glom/index.html.fr</doc>
-		<doc long="sv">http://library.gnome.org/users/glom/index.html.sv</doc>
+		<doc lang="sv">http://library.gnome.org/users/glom/index.html.sv</doc>
 		<remote-id type="freshmeat">glom</remote-id>
 	</upstream>
 	<longdescription lang="en">

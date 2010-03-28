@@ -4,7 +4,9 @@
 
 EAPI="2"
 
-inherit gnome2
+PYTHON_DEPEND="*"
+
+inherit gnome2 python
 
 DESCRIPTION="An easy to use database designer and user interface"
 HOMEPAGE="http://www.glom.org/"
@@ -40,6 +42,8 @@ DOCS="AUTHORS ChangeLog NEWS README TODO"
 pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
+		--enable-silent-rules
+		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 		$(use_enable client-only)"
 
 	if ! use postgres && ! use sqlite ; then
