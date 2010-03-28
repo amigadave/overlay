@@ -64,7 +64,7 @@ src_prepare() {
 pkg_setup() {
 	if use canvas || use graphviz || use sourceview; then
 		if ! use gtk; then
-			ewarn "You must enable USE=gtk to make use of canvas, graphivz or sourceview USE flag."
+			ewarn "You must enable USE=gtk to make use of canvas, graphviz or sourceview USE flag."
 			ewarn "Disabling for now."
 			G2CONF="${G2CONF} --without-goocanvas --without-graphivz --without-gtksourceview"
 		else

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>gnome</herd>
+	<longdescription>
+	Libgda is a (relatively small) database access library:
+
+    * a wrapper like ODBC but with more features to access several database
+	engines
+    * a meta data extractor (to know all about database objects in a common way)
+    * comes with an SQL console application (like mysql, psql or sqlite3
+	consoles)
+    * relies on GLib, coded in C, its API is easy to use
+    * at the moment supports SQLite, MySQL, PostgreSQL, MSAccess and Bdb, work
+	is in progress for other database types (such as Firebird and Oracle) and to
+	wrap JDBC for more wider usage.
+    * LGPL licensed
+	</longdescription>
+	<use>
+		<flag name="canvas">
+		Enables support for <pkg>x11-libs/goocanvas</pkg>
+		</flag>
+		<flag name='mdb'>
+		Enables Microsoft Access DB support
+		</flag>
+		<flag name="sourceview">
+		Enable support for <pkg>x11-libs/gtksourceview</pkg>
+		</flag>
+		<flag name='xbase'>
+		Enables support for xbase databases (dBase, FoxPro,
+		etc.)
+		</flag>
+	</use>
+</pkgmetadata>
