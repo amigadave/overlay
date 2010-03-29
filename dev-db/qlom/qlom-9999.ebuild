@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit base fdo-mime git
+inherit base fdo-mime git gnome2-utils
 
 DESCRIPTION="A Qt application to view Glom databases"
 HOMEPAGE="http://gitorious.org/qlom"
@@ -31,12 +31,18 @@ src_install() {
 	base_src_install
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	fdo-mime_mime_database_update
 	fdo-mime_desktop_database_update
+	gnome2_icon_cache_update
 }
 
 pkg_postrm() {
+	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
 	fdo-mime_mime_database_update
 }
