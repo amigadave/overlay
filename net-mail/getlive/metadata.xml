@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>no-herd</herd>
+	<longdescription lang="en">
+	Fetches your Hotmail Live mail such that it can be stored in a local mailbox
+	or further processed via procmail-like mail filters.
+	</longdescription>
+</pkgmetadata>
+
