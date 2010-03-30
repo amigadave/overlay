@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>gnome-mm</herd>
+	<longdescription>
+	 libxml++ is a C++ API for the popular libxml XML parser, written in C.
+	 libxml is famous for its high performance and compliance to standard
+	 specifications, but its C API is quite difficult even for common tasks.
+
+	 libxml++ presents a simple C++-like API that can achieve common tasks with
+	 less code. Unlike some other C++ parsers, it does not try to avoid the
+	 advantages of standard C++ features such as namespaces, STL containers or
+	 runtime type identification, and it does not try to conform to standard API
+	 specifications meant for Java. Therefore libxml++ requires a fairly modern
+	 C++ compiler such as g++ 3. 
+	</longdescription>
+</pkgmetadata>
