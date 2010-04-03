@@ -4,6 +4,8 @@
 
 EAPI="2"
 
+PYTHON_DEPEND="*"
+
 inherit gnome2
 
 DESCRIPTION="An easy to use database designer and user interface"
@@ -18,7 +20,7 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-cpp/libgdamm-3.99.18:3.99
 	>=dev-cpp/goocanvasmm-0.14.0
 	>=dev-cpp/gconfmm-2.6.0
-	>=dev-cpp/gtkmm-2.19.2
+	>=dev-cpp/gtkmm-2.19.7
 	>=dev-cpp/libxmlpp-2.24.0
 	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm )
 	dev-libs/boost[python]
