@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>graphics</herd>
+	<longdescription lang='en'>
+		The Unidentified Flying Raw (UFRaw) is a utility to read and manipulate
+		raw images from digital cameras. It can be used on its own or as a Gimp
+		plug-in. It reads raw images using Dave Coffin's raw conversion utility
+		- DCRaw. UFRaw supports color management workflow based on Little CMS,
+		allowing the user to apply ICC color profiles. For Nikon users UFRaw has
+		the advantage that it can read the camera's tone curves. Even if you
+		don't own a Nikon, you can still apply a Nikon curve to your images.
+	</longdescription>
+	<use>
+		<flag name='contrast'>
+			enable contrast setting option
+		</flag>
+		<flag name='exif'>
+			Enable support for EXIF and XMP metadata through <pkg>media-gfx/exiv2</pkg>
+		<flag name='fits'>
+			Enable support for the FITS image format through <pkg>sci-libs/cfitsio</pkg>
+		</flag>
+		<flag name='gnome'>
+			Install <pkg>gnome-base/gconf</pkg> schemas and desktop file, and
+			register UFRaw as being able to open raw files
+		</flag>
+		<flag name='hotpixels'>
+			enable hot pixel elimination
+		</flag>
+		<flag name='lensfun'>
+			enable the <pkg>media-libs/lensfun</pkg> lens-correction library
+		</flag>
+		<flag name='timezone'>
+			enable DST correction for file timestamps
+		</flag>
+	</use>
+</pkgmetadata>
