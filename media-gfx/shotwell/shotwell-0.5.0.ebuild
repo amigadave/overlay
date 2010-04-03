@@ -30,7 +30,8 @@ RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=sys-fs/udev-145[extras]
 	>=x11-libs/gtk+-2.14.4:2"
 DEPEND="${RDEPEND}
-	<dev-lang/vala-0.8.0"
+	>=dev-lang/vala-0.7.10
+	!>=dev-lang/vala-0.8.0"
 
 DOCS="AUTHORS MAINTAINERS NEWS README THANKS"
 
