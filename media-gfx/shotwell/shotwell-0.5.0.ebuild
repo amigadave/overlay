@@ -44,6 +44,6 @@ pkg_setup() {
 src_install() {
 	# This is needed so that gnome2_gconf_savelist() works correctly.
 	insinto "${EPREFIX}"/etc/gconf/schemas
-	doins misc/shotwell.schemas
+	doins misc/shotwell.schemas || die "install gconf schema failed"
 	gnome2_src_install
 }
