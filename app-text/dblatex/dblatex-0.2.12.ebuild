@@ -3,6 +3,11 @@
 # $Header: $
 
 EAPI="2"
+PYTHON_DEPEND="*"
+SUPPORT_PYTHON_ABIS="1"
+# Not tested with Python 3.
+RESTRICT_PYTHON_ABIS="3.*"
+PYTHON_MODNAME="dbtexmf"
 
 inherit distutils
 
@@ -24,12 +29,20 @@ DEPEND="app-text/texlive
 	dev-texlive/texlive-pictures"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	distutils_src_prepare
+}
+
+src_compile() {
+	distutils_src_compile
+}
+
 src_install() {
 	distutils_src_install
-	mv "${D}/usr/bin/dblatex" "${D}/usr/bin/docbook2latex" || die "mv dblatex"
-	mv "${D}/usr/share/man/man1/dblatex.1.gz" \
-		"${D}/usr/share/man/man1/docbook2latex.1.gz" || die "mv dblatex.1.gz"
-	mv -f "${D}/usr/share/doc/${PN}" "${D}/usr/share/doc/${PF}" || die "mv doc"
+	newbin "${S}"/scripts/dblatex docbook2latex || die "newbin failed"
+	mv "${D}"/usr/share/man/man1/dblatex.1.gz \
+		"${D}"/usr/share/man/man1/docbook2latex.1.gz || die "mv dblatex.1.gz"
+	mv "${D}"/usr/share/doc/${PN}/* "${D}"/usr/share/doc/${PF} || die "mv doc"
 
 	einfo "This package installs its main binary as"
 	einfo "  docbook2latex"
