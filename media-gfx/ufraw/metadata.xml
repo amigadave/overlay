@@ -17,6 +17,7 @@
 		</flag>
 		<flag name='exif'>
 			Enable support for EXIF and XMP metadata through <pkg>media-gfx/exiv2</pkg>
+		</flag>
 		<flag name='fits'>
 			Enable support for the FITS image format through <pkg>sci-libs/cfitsio</pkg>
 		</flag>
