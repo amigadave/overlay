@@ -4,8 +4,6 @@
 
 EAPI="2"
 
-PYTHON_DEPEND="*"
-
 inherit gnome2
 
 DESCRIPTION="An easy to use database designer and user interface"
@@ -37,6 +35,9 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	dev-libs/glib
 	postgres? ( virtual/postgresql-base )"
+
+# Tests require X. Will be fixed upstream soon.
+RESTRICT="tests"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
 
