@@ -6,7 +6,7 @@ EAPI="2"
 
 PYTHON_DEPEND="*"
 
-inherit gnome2 python
+inherit gnome2 python virtualx
 
 DESCRIPTION="An easy to use database designer and user interface"
 HOMEPAGE="http://www.glom.org/"
@@ -39,6 +39,9 @@ DEPEND="${RDEPEND}
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
 
+# Tests hang, fixed in 1.14.0.
+RESTRICT="test"
+
 pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
@@ -55,4 +58,8 @@ pkg_setup() {
 			$(use_enable postgres postgresql)
 			$(use_enable sqlite)"
 	fi
+}
+
+src_test() {
+	Xemake check || die "tests failed"
 }

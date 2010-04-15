@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit gnome2
+inherit gnome2 virtualx
 
 DESCRIPTION="An easy to use database designer and user interface"
 HOMEPAGE="http://www.glom.org/"
@@ -36,14 +36,13 @@ DEPEND="${RDEPEND}
 	dev-libs/glib
 	postgres? ( virtual/postgresql-base )"
 
-# Tests require X. Will be fixed upstream soon.
-RESTRICT="tests"
-
 DOCS="AUTHORS ChangeLog NEWS README TODO"
 
 pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
+		--enable-silent-rules
+		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 		$(use_enable client-only)"
 
 	if ! use postgres && ! use sqlite ; then
@@ -55,4 +54,9 @@ pkg_setup() {
 			$(use_enable postgres postgresql)
 			$(use_enable sqlite)"
 	fi
+}
+
+# Tests require an X server.
+src_test() {
+	Xemake check || die "tests failed"
 }
