@@ -34,7 +34,7 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
 	dev-util/pkgconfig
-	doc? ( app-doc/doxygen )
+	doc? ( app-doc/doxygen dev-python/sphinx )
 	dev-libs/glib
 	postgres? ( virtual/postgresql-base )"
 
@@ -53,6 +53,7 @@ pkg_setup() {
 			--disable-sqlite"
 	else
 		G2CONF="${G2CONF}
+			$(use_enable doc documentation)
 			$(use_enable postgres postgresql)
 			$(use_enable sqlite)"
 	fi
