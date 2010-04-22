@@ -59,8 +59,7 @@ pkg_setup() {
 
 	G2CONF="${G2CONF} --with-extensions=$(echo "${extensions}" | sed -e 's/[[:space:]]\+/,/g')"
 
-	G2CONF="${G2CONF} --with-gecko=libxul-embedding \
-		--disable-maintainer-mode"
+	G2CONF="${G2CONF} --with-gecko=libxul-embedding"
 }
 
 src_prepare() {
@@ -71,6 +70,9 @@ src_prepare() {
 	# Don't remove sessionsaver, please.  -dang
 	epatch "${WORKDIR}"/${PN}-2.21.92-sessionsaver-v4.patch
 	echo "extensions/sessionsaver/ephy-sessionsaver-extension.c" >> po/POTFILES.in
+
+	# Fix with gtk+ >= 2.19.7, Gentoo bug #316119.
+	epatch "${FILESDIR}"/${PN}-2.26.1-fix-deprecated-accessors.patch
 
 	# Fix building with libtool-1  bug #257337
 	rm m4/lt* m4/libtool.m4

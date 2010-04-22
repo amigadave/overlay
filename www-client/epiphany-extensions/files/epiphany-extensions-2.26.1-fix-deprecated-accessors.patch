@@ -1,0 +1,135 @@
+Fix for broken GtkWidget accessor functions, working around the need to disable
+maintainer mode, as per Gentoo bug #316119.
+
+diff -urN epiphany-extensions-2.26.1.old/extensions/adblock/ephy-adblock-extension.c epiphany-extensions-2.26.1/extensions/adblock/ephy-adblock-extension.c
+--- epiphany-extensions-2.26.1.old/extensions/adblock/ephy-adblock-extension.c	2010-04-22 21:40:13.080012421 +0200
++++ epiphany-extensions-2.26.1/extensions/adblock/ephy-adblock-extension.c	2010-04-22 21:22:27.344014794 +0200
+@@ -396,7 +396,11 @@
+ 		EphyWindow *window)
+ {
+ 	/* FIXME: this shouldn't happen anymore with gtk 2.10 ! Test & remove */
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_realized (window) == FALSE) return; /* on startup */
++#else
+ 	if (GTK_WIDGET_REALIZED (window) == FALSE) return; /* on startup */
++#endif
+ 
+ 	update_statusbar (window);
+ }
+diff -urN epiphany-extensions-2.26.1.old/extensions/certificates/ephy-certificates-extension.c epiphany-extensions-2.26.1/extensions/certificates/ephy-certificates-extension.c
+--- epiphany-extensions-2.26.1.old/extensions/certificates/ephy-certificates-extension.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/certificates/ephy-certificates-extension.c	2010-04-22 22:34:26.900012032 +0200
+@@ -162,7 +162,11 @@
+ 	g_return_if_fail (manager != NULL);
+ 
+ 	window = gtk_widget_get_toplevel (manager);
++#if GTK_CHECK_VERSION (2, 19, 7)
++	g_return_if_fail (gtk_widget_is_toplevel (window));
++#else
+ 	g_return_if_fail (GTK_WIDGET_TOPLEVEL (window));
++#endif
+ 
+ 	gtk_window_set_role (GTK_WINDOW (window), "epiphany-certificate-manager");
+ 	gtk_window_set_title (GTK_WINDOW (window), _("Certificates"));
+@@ -193,7 +197,11 @@
+ 	g_return_if_fail (manager != NULL);
+ 
+ 	window = gtk_widget_get_toplevel (manager);
++#if GTK_CHECK_VERSION (2, 19, 7)
++	g_return_if_fail (gtk_widget_is_toplevel (window));
++#else
+ 	g_return_if_fail (GTK_WIDGET_TOPLEVEL (window));
++#endif
+ 
+ 	gtk_window_set_role (GTK_WINDOW (window), "epiphany-security-device-manager");
+ 	gtk_window_set_title (GTK_WINDOW (window), _("Security Devices"));
+diff -urN epiphany-extensions-2.26.1.old/extensions/error-viewer/ephy-error-viewer-extension.c epiphany-extensions-2.26.1/extensions/error-viewer/ephy-error-viewer-extension.c
+--- epiphany-extensions-2.26.1.old/extensions/error-viewer/ephy-error-viewer-extension.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/error-viewer/ephy-error-viewer-extension.c	2010-04-22 21:31:40.396014779 +0200
+@@ -324,7 +324,11 @@
+ 		EphyWindow *window)
+ {
+ 	g_return_if_fail (EPHY_IS_WINDOW (window));
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_realized (window) == FALSE) return; /* on startup */
++#else
+ 	if (GTK_WIDGET_REALIZED (window) == FALSE) return; /* on startup */
++#endif
+ 
+ 	update_actions (window);
+ }
+diff -urN epiphany-extensions-2.26.1.old/extensions/page-info/ephy-page-info-extension.c epiphany-extensions-2.26.1/extensions/page-info/ephy-page-info-extension.c
+--- epiphany-extensions-2.26.1.old/extensions/page-info/ephy-page-info-extension.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/page-info/ephy-page-info-extension.c	2010-04-22 21:30:59.272014427 +0200
+@@ -227,7 +227,11 @@
+ {
+ 	EphyEmbed *embed;
+ 
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_realized (window) == FALSE) return; /* on startup */
++#else
+ 	if (GTK_WIDGET_REALIZED (window) == FALSE) return; /* on startup */
++#endif
+ 
+ 	embed = ephy_embed_container_get_active_child (EPHY_EMBED_CONTAINER (window));
+ 	update_action (window, embed);
+diff -urN epiphany-extensions-2.26.1.old/extensions/rss/ephy-rss-extension.c epiphany-extensions-2.26.1/extensions/rss/ephy-rss-extension.c
+--- epiphany-extensions-2.26.1.old/extensions/rss/ephy-rss-extension.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/rss/ephy-rss-extension.c	2010-04-22 21:30:32.136015383 +0200
+@@ -290,7 +290,11 @@
+ 			  GParamSpec *pspec,
+ 			  gpointer data)
+ {
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_realized (window) == FALSE) return; /* on startup */
++#else
+ 	if (GTK_WIDGET_REALIZED (window) == FALSE) return; /* on startup */
++#endif
+ 
+ 	ephy_rss_update_action (window);
+ }
+diff -urN epiphany-extensions-2.26.1.old/extensions/select-stylesheet/ephy-css-menu.c epiphany-extensions-2.26.1/extensions/select-stylesheet/ephy-css-menu.c
+--- epiphany-extensions-2.26.1.old/extensions/select-stylesheet/ephy-css-menu.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/select-stylesheet/ephy-css-menu.c	2010-04-22 21:34:10.256014150 +0200
+@@ -360,7 +360,11 @@
+ 	g_signal_connect (window, "notify::active-child",
+ 			  G_CALLBACK (sync_active_tab_cb), menu);
+ 
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_realized (window))
++#else
+ 	if (GTK_WIDGET_REALIZED (window))
++#endif
+ 	{
+ 		embed = ephy_embed_container_get_active_child (EPHY_EMBED_CONTAINER (window));
+ 		ephy_css_menu_set_embed (menu, embed);
+diff -urN epiphany-extensions-2.26.1.old/extensions/sidebar/ephy-sidebar.c epiphany-extensions-2.26.1/extensions/sidebar/ephy-sidebar.c
+--- epiphany-extensions-2.26.1.old/extensions/sidebar/ephy-sidebar.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/sidebar/ephy-sidebar.c	2010-04-22 21:29:50.176014852 +0200
+@@ -220,7 +220,11 @@
+ 	sidebar->priv->pages = g_list_append (sidebar->priv->pages,
+ 					      (gpointer)page);
+ 
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (gtk_widget_get_visible (sidebar) && sidebar->priv->current == NULL)
++#else
+ 	if (GTK_WIDGET_VISIBLE (sidebar) && sidebar->priv->current == NULL)
++#endif
+ 	{
+ 		select_page (sidebar, page);
+ 	}
+diff -urN epiphany-extensions-2.26.1.old/extensions/sidebar/ephy-sidebar-embed.c epiphany-extensions-2.26.1/extensions/sidebar/ephy-sidebar-embed.c
+--- epiphany-extensions-2.26.1.old/extensions/sidebar/ephy-sidebar-embed.c	2010-04-22 21:40:13.088011324 +0200
++++ epiphany-extensions-2.26.1/extensions/sidebar/ephy-sidebar-embed.c	2010-04-22 21:29:37.588014562 +0200
+@@ -484,7 +484,11 @@
+ 	widget->allocation = *allocation;
+ 	child = GTK_BIN (widget)->child;
+ 
++#if GTK_CHECK_VERSION (2, 19, 7)
++	if (child && gtk_widget_get_visible (child))
++#else
+ 	if (child && GTK_WIDGET_VISIBLE (child))
++#endif
+ 	{
+ 		gtk_widget_size_allocate (child, allocation);
+ 	}
