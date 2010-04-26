@@ -43,9 +43,9 @@ DOCS="AUTHORS ChangeLog NEWS README TODO"
 pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
-		--enable-silent-rules
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		$(use_enable client-only)"
+		$(use_enable client-only)
+		$(use_enable doc documentation)"
 
 	if ! use postgres && ! use sqlite ; then
 		G2CONF="${G2CONF}
@@ -53,7 +53,6 @@ pkg_setup() {
 			--disable-sqlite"
 	else
 		G2CONF="${G2CONF}
-			$(use_enable doc documentation)
 			$(use_enable postgres postgresql)
 			$(use_enable sqlite)"
 	fi

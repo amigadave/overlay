@@ -41,7 +41,6 @@ DOCS="AUTHORS ChangeLog NEWS README TODO"
 pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
-		--enable-silent-rules
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 		$(use_enable client-only)"
 
