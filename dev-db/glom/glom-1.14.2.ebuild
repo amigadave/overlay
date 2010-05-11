@@ -10,9 +10,9 @@ DESCRIPTION="An easy to use database designer and user interface"
 HOMEPAGE="http://www.glom.org/"
 LICENSE="|| ( GPL-2 GPL-3 LGPL-2.1 )"
 
-IUSE="-client-only doc +postgres sqlite"
+IUSE="-client-only doc sqlite"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-cpp/libgdamm-3.99.18:3.99
@@ -27,14 +27,12 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-python/libgda-python-2.25.3
 	net-dns/avahi[gtk]
 	>=net-libs/libepc-0.3.1
-	postgres? ( gnome-extra/libgda:4[postgres] virtual/postgresql-server )
-	!sqlite? ( gnome-extra/libgda:4[postgres] virtual/postgresql-server )"
+	virtual/postgresql-server"
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
 	dev-util/pkgconfig
-	doc? ( app-doc/doxygen )
-	dev-libs/glib
-	postgres? ( virtual/postgresql-base )"
+	doc? ( app-doc/doxygen dev-python/sphinx )
+	dev-libs/glib"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
 
@@ -42,17 +40,10 @@ pkg_setup() {
 	G2CONF="${G2CONF}
 		--disable-static
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		$(use_enable client-only)"
-
-	if ! use postgres && ! use sqlite ; then
-		G2CONF="${G2CONF}
-			--enable-postgresql
-			--disable-sqlite"
-	else
-		G2CONF="${G2CONF}
-			$(use_enable postgres postgresql)
-			$(use_enable sqlite)"
-	fi
+		--enable-postgresql
+		$(use_enable client-only)
+		$(use_enable doc documentation)
+		$(use_enable sqlite)"
 }
 
 # Tests require an X server.
