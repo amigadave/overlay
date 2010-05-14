@@ -20,7 +20,7 @@ IUSE="postgres sqlite"
 RDEPEND="dev-db/glom
 	x11-libs/qt-gui:4
 	x11-libs/qt-sql:4
-	postgres? ( dev-db/glom[postgres] x11-libs/qt-sql[postgres] )
+	postgres? ( x11-libs/qt-sql[postgres] )
 	sqlite? ( dev-db/glom[sqlite] x11-libs/qt-sql[sqlite] )"
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
