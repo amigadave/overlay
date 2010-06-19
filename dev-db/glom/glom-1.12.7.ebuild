@@ -29,7 +29,7 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	gnome-extra/libgda:4[postgres]
 	net-dns/avahi[gtk]
 	>=net-libs/libepc-0.3.1
-	virtual/postgresql-server"
+	dev-db/postgresql-server"
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
 	dev-util/pkgconfig

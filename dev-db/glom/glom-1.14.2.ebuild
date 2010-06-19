@@ -27,7 +27,7 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-python/libgda-python-2.25.3
 	net-dns/avahi[gtk]
 	>=net-libs/libepc-0.3.1
-	virtual/postgresql-server"
+	dev-db/postgresql-server"
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
 	dev-util/pkgconfig
