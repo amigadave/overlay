@@ -28,7 +28,6 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-python/pygobject-2.6.0
 	>=dev-python/libgda-python-2.25.3
 	gnome-extra/libgda:4[postgres]
-	net-dns/avahi[gtk]
 	>=net-libs/libepc-0.3.1
 	dev-db/postgresql-server"
 DEPEND="${RDEPEND}

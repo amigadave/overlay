@@ -1,0 +1,24 @@
+diff -urN glom-1.14.3.old/Makefile.in glom-1.14.3/Makefile.in
+--- glom-1.14.3.old/Makefile.in	2010-06-19 15:32:30.000000000 +0200
++++ glom-1.14.3/Makefile.in	2010-06-21 17:50:41.937704893 +0200
+@@ -2320,7 +2320,7 @@
+ tests_test_document_load_LDADD = $(tests_ldadd) $(LIBGLOM_LIBS)
+ tests_test_document_autosave_LDADD = $(tests_ldadd) $(LIBGLOM_LIBS)
+ tests_test_signal_reemit_LDADD = $(LIBGLOM_LIBS)
+-tests_test_load_python_library_LDADD = $(LIBGLOM_LIBS)
++tests_test_load_python_library_LDADD = $(LIBGLOM_LIBS) -ldl
+ tests_test_python_module_LDADD = $(tests_ldadd) $(PYTHON_LIBS)
+ tests_test_python_execute_func_LDADD = $(tests_ldadd) $(GLOM_LIBS) $(PYTHON_LIBS)
+ tests_test_python_execute_func_bad_syntax_LDADD = $(tests_ldadd) $(GLOM_LIBS) $(PYTHON_LIBS)
+diff -urN glom-1.14.3.old/Makefile_tests.am glom-1.14.3/Makefile_tests.am
+--- glom-1.14.3.old/Makefile_tests.am	2010-06-19 14:26:36.000000000 +0200
++++ glom-1.14.3/Makefile_tests.am	2010-06-21 17:50:35.786408412 +0200
+@@ -142,7 +142,7 @@
+ tests_test_document_load_LDADD = $(tests_ldadd) $(LIBGLOM_LIBS)
+ tests_test_document_autosave_LDADD = $(tests_ldadd) $(LIBGLOM_LIBS)
+ tests_test_signal_reemit_LDADD = $(LIBGLOM_LIBS)
+-tests_test_load_python_library_LDADD = $(LIBGLOM_LIBS)
++tests_test_load_python_library_LDADD = $(LIBGLOM_LIBS) -ldl
+ tests_test_python_module_LDADD = $(tests_ldadd) $(PYTHON_LIBS)
+ tests_test_python_execute_func_LDADD = $(tests_ldadd) $(GLOM_LIBS) $(PYTHON_LIBS)
+ tests_test_python_execute_func_bad_syntax_LDADD = $(tests_ldadd) $(GLOM_LIBS) $(PYTHON_LIBS)

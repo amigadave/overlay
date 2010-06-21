@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit gnome2 virtualx
+inherit eutils gnome2 virtualx
 
 DESCRIPTION="An easy to use database designer and user interface"
 HOMEPAGE="http://www.glom.org/"
@@ -25,7 +25,6 @@ RDEPEND=">=gnome-extra/libgda-4.1.2:4
 	>=dev-libs/libxslt-1.1.10
 	>=dev-python/pygobject-2.6.0
 	>=dev-python/libgda-python-2.25.3
-	net-dns/avahi[gtk]
 	>=net-libs/libepc-0.3.1
 	dev-db/postgresql-server"
 DEPEND="${RDEPEND}
@@ -35,6 +34,10 @@ DEPEND="${RDEPEND}
 	dev-libs/glib"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
+
+src_prepare() {
+	epatch "${FILESDIR}/${PN}-1.14.3-fix-test-load-python-module-linking.patch"
+}
 
 pkg_setup() {
 	G2CONF="${G2CONF}
