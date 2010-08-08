@@ -8,57 +8,43 @@ DESCRIPTION="Argyll is an open source, ICC compatible color management system."
 HOMEPAGE="http://www.argyllcms.com"
 MY_P="Argyll_V${PV}"
 SRC_URI="http://www.argyllcms.com/${MY_P}_src.zip"
-LICENSE="GPL-3"
+LICENSE="AGPL-3 GPL-2 GPL-3"
 SLOT="0"
-KEYWORDS="~x86 amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND=">=media-libs/tiff-3.7.3
 	>=media-libs/jpeg-6b-r5
 	>=sys-libs/zlib-1.2.3"
 DEPEND="${RDEPEND}
-	|| ( >=dev-util/jam-2.4 >=dev-util/ftjam-2.4 )"
+	app-arch/unzip
+	>=dev-util/ftjam-2.4
+	x11-libs/libXinerama
+	x11-libs/libXScrnSaver"
 
 S="${WORKDIR}/${MY_P}"
 
 src_install() {
-	emake install
+	emake install || die
 
-	# Install binaries to /usr/bin
-	exeinto /usr/bin
-	exeopts -m0755
-	doexe bin/*
+	rm bin/License.txt || die
+	dobin bin/* || die
+	dohtml doc/* || die
 
-	# Delete license file from BINDIR
-	rm "${D}/usr/bin/License.txt"
+	newdoc log.txt ChangeLog ||die
+	newdoc Readme.txt README || die
+	newdoc ttbd.txt TODO || die
+	newdoc notes.txt NOTES || die
 
-	# Install HTML documentation
-	dohtml doc/*
-
-	# Install text documentation
-	newdoc log.txt     CHANGELOG
-	newdoc Readme.txt  README
-	newdoc License.txt LICENSE
-	newdoc ttbd.txt    TODO
-	newdoc notes.txt   NOTES
-
-	# Install reference files
-	insinto /usr/share/${PF}/ref
-	insopts -m0644
-	doins   ref/*
+	insinto /usr/share/${PN}/ref
+	doins ref/* || die
 }
 
 pkg_postinst() {
-	ewarn
-	ewarn "\tExecutables have been renamed!"
-	ewarn "\tRead /usr/share/doc/${P}/CHANGELOG.bz2!."
-	ewarn
-	einfo
 	einfo "If you have a Spyder2 you need to extract the firmware"
 	einfo "from the spyder2_setup.exe (ColorVision CD)"
 	einfo "and store it as /usr/bin/spyd2PLD.bin."
 	einfo
 	einfo "For further info on setting up instrument access read"
 	einfo "http://www.argyllcms.com/doc/Installing_Linux.html"
-	einfo
 }
