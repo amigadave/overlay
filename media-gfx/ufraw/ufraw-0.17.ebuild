@@ -1,8 +1,9 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/ufraw/ufraw-0.17.ebuild,v 1.1 2010/04/02 14:34:28 maekke Exp $
+# $Header: $
 
-EAPI=2
+EAPI="2"
+
 inherit fdo-mime gnome2-utils eutils autotools
 
 DESCRIPTION="RAW Image format viewer and GIMP plugin"
@@ -16,7 +17,7 @@ IUSE="bzip2 contrast exif fits gimp gnome gtk jpeg lensfun openmp png tiff timez
 
 RDEPEND="
 	dev-libs/glib
-	>=media-libs/lcms-1.14
+	=media-libs/lcms-1*
 	bzip2? ( app-arch/bzip2 )
 	exif? ( >=media-gfx/exiv2-0.16 )
 	fits? ( sci-libs/cfitsio )
