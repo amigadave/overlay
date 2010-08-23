@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="lcms openmp examples"
 
-RDEPEND=""
+RDEPEND="lcms? ( =media-libs/lcms-1* )"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/LibRaw-${PV}"
