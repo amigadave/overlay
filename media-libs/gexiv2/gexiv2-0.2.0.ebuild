@@ -22,10 +22,6 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/lib${P}"
 
-src_prepare() {
-	epatch "${FILESDIR}/${P}-makefile.patch" || die "Patching failed."
-}
-
 src_install() {
 	gnome2_src_install
 }
