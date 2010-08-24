@@ -31,14 +31,14 @@ RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=sys-fs/udev-145[extras]
 	>=x11-libs/gtk+-2.18.0:2
 	>=media-libs/libraw-0.9.0
-	>=media-libs/gexiv2-0.1.0"
+	>=media-libs/gexiv2-0.2.0"
 DEPEND="${RDEPEND}
-	=dev-lang/vala-0.8*"
+	>=dev-lang/vala-0.9.5"
 
 DOCS="AUTHORS MAINTAINERS NEWS README THANKS"
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-libraw.patch" || die "libraw patch failed."
+	epatch "${FILESDIR}/${PN}-0.7.0-libraw.patch" || die "libraw patch failed."
 	mv vapi/libraw{,_r}.vapi || die "renaming libraw.vapi failed"
 }
 
