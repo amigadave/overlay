@@ -19,6 +19,7 @@ IUSE=""
 
 RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=dev-libs/dbus-glib-0.80
+	>=dev-libs/glib-2.24.0
 	>=dev-libs/libgee-0.5.0
 	>=dev-libs/libunique-1.0.0
 	>=dev-libs/libxml2-2.6.32
@@ -28,11 +29,11 @@ RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=net-libs/libsoup-2.26.0
 	>=net-libs/webkit-gtk-1.1.5
 	>=sys-fs/udev-145[extras]
-	>=x11-libs/gtk+-2.14.4:2
+	>=x11-libs/gtk+-2.18.0:2
 	>=media-libs/libraw-0.9.0
-	>=media-libs/gexiv2-0.1.0"
+	>=media-libs/gexiv2-0.2.0"
 DEPEND="${RDEPEND}
-	=dev-lang/vala-0.8*"
+	>=dev-lang/vala-0.9.5"
 
 DOCS="AUTHORS MAINTAINERS NEWS README THANKS"
 
