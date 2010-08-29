@@ -1,6 +1,6 @@
-diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
---- shotwell-0.7.0.old/Makefile	2010-08-21 02:27:06.000000000 +0200
-+++ shotwell-0.7.0/Makefile	2010-08-24 10:30:22.652830088 +0200
+diff -urN shotwell-0.7.1.old/Makefile shotwell-0.7.1/Makefile
+--- shotwell-0.7.1.old/Makefile	2010-08-26 22:42:39.000000000 +0200
++++ shotwell-0.7.1/Makefile	2010-08-29 16:20:31.272302003 +0200
 @@ -135,7 +135,7 @@
  	FixedKeyFile.vapi \
  	ExtendedPosix.vapi \
@@ -10,7 +10,7 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  	gdk-none.vapi
  
  RESOURCE_FILES = \
-@@ -268,10 +268,8 @@
+@@ -270,10 +270,8 @@
  	glib-2.0 \
  	libexif \
  	sqlite3 \
@@ -23,7 +23,7 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  
  ifdef LINUX
  EXT_PKGS += \
-@@ -286,15 +284,14 @@
+@@ -288,15 +286,14 @@
  	gdk-x11-2.0
  endif
  
@@ -41,7 +41,7 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  
  LIBRAW_VERSION = \
  	0.9.0
-@@ -311,7 +308,7 @@
+@@ -313,7 +310,7 @@
  	dbus-glib-1 >= 0.80
  endif
  
@@ -50,16 +50,16 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  
  ifndef BUILD_DIR
  BUILD_DIR=src
-@@ -342,7 +339,7 @@
+@@ -344,7 +341,7 @@
  DIST_FILES = Makefile configure minver $(EXPANDED_SRC_FILES) $(EXPANDED_VAPI_FILES) \
  	$(EXPANDED_SRC_HEADER_FILES) $(EXPANDED_RESOURCE_FILES) $(TEXT_FILES) $(EXPANDED_ICON_FILES) \
  	$(EXPANDED_SYS_INTEGRATION_FILES) $(EXPANDED_PO_FILES) po/shotwell.pot windows/install-deps \
 -	windows/shotwell.rc windows/winstall.iss src/windows.c src/GConf.vala libraw-config \
 +	windows/shotwell.rc windows/winstall.iss src/windows.c src/GConf.vala \
- 	$(EXPANDED_HELP_FILES) $(EXPANDED_HELP_IMAGES) apport/shotwell.py
+ 	$(EXPANDED_HELP_FILES) $(EXPANDED_HELP_IMAGES)
  
  DIST_TAR = $(PROGRAM)-$(VERSION).tar
-@@ -385,14 +382,9 @@
+@@ -387,14 +384,9 @@
  CFLAGS += -DG_UDEV_API_IS_SUBJECT_TO_CHANGE
  endif
  
@@ -77,7 +77,7 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  endif
  
  $(LANG_STAMP): $(EXPANDED_PO_FILES)
-@@ -523,10 +515,6 @@
+@@ -525,10 +517,6 @@
  else ifdef EXT_PKGS
  	@pkg-config --print-errors --exists $(EXT_PKGS)
  endif
@@ -88,7 +88,7 @@ diff -urN shotwell-0.7.0.old/Makefile shotwell-0.7.0/Makefile
  endif
  	@ type msgfmt > /dev/null || ( echo 'msgfmt (usually found in the gettext package) is missing and is required to build Shotwell. ' ; exit 1 )
  	mkdir -p $(BUILD_DIR)
-@@ -544,15 +532,15 @@
+@@ -546,15 +534,15 @@
  	@
  
  $(EXPANDED_OBJ_FILES): %.o: %.c $(CONFIG_IN) Makefile
