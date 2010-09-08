@@ -28,5 +28,6 @@ src_configure() {
 }
 
 src_test() {
-	Xemake check || die "tests failed"
+	emake check || die "tests failed"
+	Xemake app-test || die "applications tests failed"
 }
