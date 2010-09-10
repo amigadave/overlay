@@ -3,6 +3,7 @@
 # $Header: $
 
 EAPI="2"
+GCONF_DEBUG="no"
 
 inherit gnome2
 
@@ -27,6 +28,6 @@ src_compile() {
 
 	if use doc ; then
 		cd docs/reference
-		emake || die "failed to build API docs"
+		emake || die "failed to build API documentation"
 	fi
 }
