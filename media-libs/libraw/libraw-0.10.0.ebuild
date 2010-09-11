@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils multilib
+inherit eutils
 
 DESCRIPTION="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 HOMEPAGE="http://www.libraw.org/"
