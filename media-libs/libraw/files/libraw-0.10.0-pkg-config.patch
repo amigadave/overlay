@@ -1,5 +1,9 @@
-'diff --git a/Makefile b/Makefile
-index 51ba805..8e9dac2 100644
+Ugly hack to include .pc file for both installed static archives for libraw.
+LIBDIR and VERSION can be patched in the ebuild. If libraw is built with lcms
+support, lcms should be added to Requires and -llcms should be added to Libs.
+If libraw is built with OpenMP support, -fopenmp should be added to Cflags and
+ -lgopenmp should be added to Libs.
+
 --- a/Makefile
 +++ b/Makefile
 @@ -20,6 +20,7 @@ all_samples: bin/raw-identify bin/simple_dcraw  bin/dcraw_emu bin/dcraw_half bin
@@ -10,39 +14,31 @@ index 51ba805..8e9dac2 100644
  
  install-binaries: all_samples
  	@if [ -d /usr/local/bin ] ; then cp bin/[a-z]* /usr/local/bin/ ; else echo 'no /usr/local/bin' ; fi
-diff --git a/libraw.pc b/libraw.pc
-new file mode 100644
-index 0000000..15ec862
 --- /dev/null
 +++ b/libraw.pc
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,11 @@
 +prefix=/usr
 +exec_prefix=${prefix}
-+libdir=${exec_prefix}/lib
++libdir=${prefix}/LIBDIR
 +includedir=${prefix}/include
 +
 +Name: libraw
 +Description: Raw image decoder library (non-thread-safe)
 +Requires: 
-+Version: 0.9.1
++Version: VERSION
 +Libs: -L${libdir} -lraw -lstdc++
 +Cflags: -I${includedir}/libraw
-+
-diff --git a/libraw_r.pc b/libraw_r.pc
-new file mode 100644
-index 0000000..b54242b
 --- /dev/null
 +++ b/libraw_r.pc
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,11 @@
 +prefix=/usr
 +exec_prefix=${prefix}
-+libdir=${exec_prefix}/lib
++libdir=${prefix}/LIBDIR
 +includedir=${prefix}/include
 +
 +Name: libraw
 +Description: Raw image decoder library (thread-safe)
 +Requires: 
-+Version: 0.9.1
++Version: VERSION
 +Libs: -L${libdir} -lraw_r -lstdc++
 +Cflags: -I${includedir}/libraw
-+
