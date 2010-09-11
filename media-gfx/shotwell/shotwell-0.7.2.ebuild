@@ -37,11 +37,6 @@ DEPEND="${RDEPEND}
 
 DOCS="AUTHORS MAINTAINERS NEWS README THANKS"
 
-src_prepare() {
-	epatch "${FILESDIR}/${P}-libraw.patch" || die "libraw patch failed."
-	mv vapi/libraw{,_r}.vapi || die "renaming libraw.vapi failed"
-}
-
 pkg_setup() {
 	G2CONF="--disable-schemas-install
 		--disable-desktop-update
