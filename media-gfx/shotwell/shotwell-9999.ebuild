@@ -5,7 +5,7 @@
 EAPI="2"
 GCONF_DEBUG="no"
 
-inherit eutils gnome2 subversion versionator
+inherit gnome2 subversion versionator
 
 DESCRIPTION="Open source photo manager for GNOME"
 HOMEPAGE="http://www.yorba.org/shotwell/"
@@ -36,11 +36,6 @@ DEPEND="${RDEPEND}
 	>=dev-lang/vala-0.9.5"
 
 DOCS="AUTHORS MAINTAINERS NEWS README THANKS"
-
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-0.7.0-libraw.patch" || die "libraw patch failed."
-	mv vapi/libraw{,_r}.vapi || die "renaming libraw.vapi failed"
-}
 
 pkg_setup() {
 	G2CONF="--disable-schemas-install
