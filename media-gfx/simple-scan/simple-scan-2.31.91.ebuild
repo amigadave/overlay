@@ -6,7 +6,7 @@ EAPI=3
 
 GCONF_DEBUG="no"
 
-inherit gnome2
+inherit autotools eutils gnome2
 
 DESCRIPTION="Simple document scanning utility"
 HOMEPAGE="https://launchpad.net/simple-scan"
@@ -17,16 +17,28 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="app-text/gnome-doc-utils
+COMMON_DEPEND="app-text/gnome-doc-utils
 	>=x11-libs/gtk+-2.18.0:2
 	dev-libs/glib:2
 	gnome-base/gconf:2
 	>=media-gfx/sane-backends-1.0.20
+	media-libs/jpeg
 	sys-fs/udev[extras]
-	>=sys-libs/zlib-1.2.5
-	x11-libs/cairo
+	sys-libs/zlib
+	x11-libs/cairo"
+RDEPEND="${COMMON_DEPEND}
+	x11-misc/xdg-utils
 	x11-themes/gnome-icon-theme"
-DEPEND="${RDEPEND}
-	>=dev-util/intltool-0.35.0"
+DEPEND="${COMMON_DEPEND}
+	>=dev-util/intltool-0.35.0
+	dev-util/pkgconfig"
 
 DOCS="AUTHORS ChangeLog NEWS README"
+
+src_prepare() {
+	gnome2_src_prepare
+
+	# Expects a zlib with pkg-config support (>=1.2.5).
+	epatch "${FILESDIR}"/${PN}-2.31.90.2-support-non-pkgconfig-zlib.patch
+	eautoreconf
+}
