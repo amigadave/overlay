@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=3
 
 inherit base git
 
@@ -17,14 +17,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="dev-util/pkgconfig"
+RDEPEND=""
 DEPEND="|| ( net-misc/curl net-misc/wget )"
 
 DOCS=( "ChangeLog" "NEWS" "README" )
 
 src_configure() {
-	econf \
-		--docdir="${EPREFIX}"/usr/share/doc/${PF}
+	econf --docdir="${EPREFIX}"/usr/share/doc/${PF}
 }
 
 src_install() {
