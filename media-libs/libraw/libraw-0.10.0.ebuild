@@ -6,7 +6,7 @@ EAPI="2"
 
 inherit eutils
 
-DESCRIPTION="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
+DESCRIPTION="A library for reading RAW files obtained from digital cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 HOMEPAGE="http://www.libraw.org/"
 SRC_URI="http://www.libraw.org/data/LibRaw-${PV}.tar.gz"
 
@@ -32,7 +32,7 @@ src_prepare() {
 		-e "/^CFLAGS/ s:-O4:${CFLAGS}:" \
 		-e "s:usr/lib:usr/${MY_LIBDIR}:g" \
 		Makefile || die "Patching the hell out of manual Makefile failed"
-	
+
 	sed -i -e "s:LIBDIR:${MY_LIBDIR}:" \
 		-e "s:VERSION:${PV}:" \
 		*.pc || die "Patching pc files failed"
