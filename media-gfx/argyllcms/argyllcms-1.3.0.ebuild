@@ -31,27 +31,28 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${MY_P}"
 
 src_compile() {
-	echo "LINKFLAGS += ${LDFLAGS} ;" >> Jamtop
-	emake || die
+	echo "LINKFLAGS += ${LDFLAGS} ;" >> Jamtop || die "respect LDFLAGS failed"
+	emake || die "emake failed"
 }
 
 src_install() {
 	emake install || die
 
-	rm bin/License.txt || die
-	dobin bin/* || die
-	dohtml doc/* || die
+	rm bin/License.txt || die "remove license failed"
+	dobin bin/* || die "install binaries failed"
+	dohtml doc/* || die "intall documentation failed"
 
-	newdoc log.txt ChangeLog ||die
-	newdoc Readme.txt README || die
-	newdoc ttbd.txt TODO || die
-	newdoc notes.txt NOTES || die
+	newdoc log.txt ChangeLog || die "install ChangeLog failed"
+	newdoc Readme.txt README || die "install README failed"
+	newdoc ttbd.txt TODO || die "install TODO failed"
+	newdoc notes.txt NOTES || die "install NOTES failed"
 
 	insinto "${EPREFIX}"/usr/share/${PN}/ref
-	doins ref/* || die
+	rm ref/{ReadMe,License}.txt || die "rm extra documentation failed"
+	doins ref/* || die "install reference files failed"
 
 	insinto /etc/udev/rules.d
-	doins libusb/55-Argyll.rules
+	doins libusb/55-Argyll.rules || die "install udev rules failed"
 }
 
 pkg_postinst() {
