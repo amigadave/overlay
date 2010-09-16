@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=3
 
 inherit eutils versionator games
 
@@ -23,7 +23,6 @@ LICENSE="Majesty-EULA BSD GPL-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="+music"
-PROPERTIES="interactive"
 RESTRICT="strip"
 
 RDEPEND="sys-libs/glibc
@@ -39,8 +38,6 @@ DEPEND=""
 
 S=${WORKDIR}
 
-GAMES_CHECK_LICENSE="yes"
-
 pkg_setup() {
 	games_pkg_setup
 }
@@ -53,56 +50,61 @@ src_unpack() {
 	cp -rf ./cd/CREDITS ./cd/README* ./cd/majestysite.url . || die "cp READMEs failed"
 	cp -rf ./cd/majesty.{bmp,xpm} . || die "cp icons failed"
 	cp -rf ./cd/bin/Linux/x86/glibc-2.1/* . || die "cp exes failed"
+
 	# Not installing the game music saves around 22 MB.
 	if use music; then
 		cp -rf ./cd/music . || die "cp music failed"
 	fi
+
 	# Installing only the lo-res movies or no movies at all causes majesty to
 	# crash, so the hi-res movies are always installed.
 	cp -rf ./cd/movies . || die "cp movies failed"
 
 	einfo "Unpacking game data"
-	unpack "./cd/data.tar.gz"
-	unpack "./cd/datamx.tar.gz"
-	unpack "./cd/quests.tar.gz"
-	unpack "./cd/questsmx.tar.gz"
+	for datafile in data datamx quests questsmx; do
+		unpack "./cd/${datafile}.tar.gz"
+	done
+
 	rm -f cd
 
 	einfo "Unpacking patches"
-	mkdir -p patch/one patch/two patch/three || die "mkdir patches failed"
-	cd patch/one
-	unpack_makeself ${MY_PATCH_ONE}
-	cd ../two
-	unpack_makeself ${MY_PATCH_TWO}
-	cd ../three
-	unpack_makeself ${MY_PATCH_THREE}
+	for patches in "one ${MY_PATCH_ONE}" "two ${MY_PATCH_TWO}" \
+		"three ${MY_PATCH_THREE}" ; do
+
+		set -- $patches
+		cd "${S}"
+		mkdir -p patch/$1 || die "mkdir $1 failed"
+		cd patch/$1
+		unpack_makeself $2
+	done
 }
 
 src_prepare() {
 	einfo "Patching binaries"
-	cd patch/one
+	local patchdirs="patch/one patch/two patch/three"
 	if use x86; then
-		bin/Linux/x86/loki_patch patch.dat "${S}" || die "loki_patch 1/3 failed"
-		cd ../two
-		bin/Linux/x86/loki_patch patch.dat "${S}" || die "loki_patch 2/3 failed"
-		cd ../three
-		bin/Linux/x86/loki_patch patch.dat "${S}" || die "loki_patch 3/3 failed"
+		for patchdir in $patchdirs; do
+			cd "${S}"/${patchdir}
+			bin/Linux/x86/loki_patch patch.dat "${S}" \
+				|| die "loki_patch ${patchdir} failed"
+		done
 	elif use amd64; then
-		bin/Linux/x86_64/loki_patch patch.dat "${S}" || die "loki_patch 1/3 failed"
-		cd ../two
-		bin/Linux/x86_64/loki_patch patch.dat "${S}" || die "loki_patch 2/3 failed"
-		cd ../three
-		bin/Linux/x86_64/loki_patch patch.dat "${S}" || die "loki_patch 3/3 failed"
+		for patchdir in $patchdirs; do
+			cd "${S}"/${patchdir}
+			bin/Linux/x86_64/loki_patch patch.dat "${S}" \
+				|| die "loki_patch ${patchdir} failed"
+		done
 	fi
+
 	cd "${S}"
-	# EULA is duplicated in licenses
+	# EULA is duplicated in licenses.
 	rm -rf patch EULA || die "rm -rf patch EULA failed"
 }
 
 src_install() {
-	dir=${GAMES_PREFIX_OPT}/${PN}
-	insinto "${dir}"
-	exeinto "${dir}"
+	local instdir=${GAMES_PREFIX_OPT}/${PN}
+	insinto "${instdir}"
+	exeinto "${instdir}"
 
 	dodoc CREDITS README* || die "dodoc failed"
 	rm CREDITS README* || die "rm CREDITS README* failed"
@@ -114,8 +116,8 @@ src_install() {
 	games_make_wrapper majesty ./majesty "${dir}" "${dir}"
 	games_make_wrapper majx ./majx "${dir}" "${dir}"
 
-	make_desktop_entry majesty "Majesty" "majesty.xpm"
-	make_desktop_entry majx "Majesty: The Northern Expansion" "majesty.xpm"
+	make_desktop_entry majesty "Majesty" "majesty"
+	make_desktop_entry majx "Majesty: The Northern Expansion" "majesty"
 
 	prepgamesdirs
 }
