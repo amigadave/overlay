@@ -25,13 +25,13 @@ IUSE="custom-cflags debug efi truetype multislot static"
 
 RDEPEND=">=sys-libs/ncurses-5.2-r5
 	dev-libs/lzo
-	truetype? ( media-libs/freetype )"
+	truetype? ( media-libs/freetype media-fonts/unifont )"
 DEPEND="${RDEPEND}
 	dev-lang/ruby"
 PROVIDE="virtual/bootloader"
 
 export STRIP_MASK="*/grub/*/*.mod"
-QA_EXECSTACK="sbin/grub-probe sbin/grub-setup sbin/grub-mkdevicemap"
+QA_EXECSTACK="sbin/grub-probe sbin/grub-setup sbin/grub-mkdevicemap bin/grub-script-check bin/grub-fstest"
 
 src_unpack() {
 	if [[ ${PV} == "9999" ]] ; then
@@ -81,6 +81,8 @@ src_install() {
 	if use multislot ; then
 		sed -i "s:grub-install:grub2-install:" "${D}"/sbin/grub-install || die
 		mv "${D}"/sbin/grub{,2}-install || die
+		mv "${D}"/sbin/grub{,2}-set-default || die
+		mv "${D}"/usr/share/man/man8/grub{,2}-install.8 || die
 		mv "${D}"/usr/share/info/grub{,2}.info || die
 	fi
 }
