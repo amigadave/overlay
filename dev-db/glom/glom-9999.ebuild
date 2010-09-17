@@ -17,10 +17,10 @@ KEYWORDS="~x86 ~amd64"
 IUSE="-client-only doc sqlite"
 
 RDEPEND=">=gnome-extra/libgda-4.1.2:4
-	>=dev-cpp/libgdamm-3.99.18:3.99
+	>=dev-cpp/libgdamm-3.99.21:3.99
 	>=dev-cpp/goocanvasmm-0.14.0
 	>=dev-cpp/gconfmm-2.6.0
-	>=dev-cpp/gtkmm-2.19.7
+	>=dev-cpp/gtkmm-2.19.7:3.0
 	>=dev-cpp/libxmlpp-2.24.0
 	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm:2.0 )
 	dev-libs/boost[python]

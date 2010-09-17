@@ -35,9 +35,6 @@
 		<flag name="client-only">
 		Build without developer mode and support for self-hosted databases.
 		</flag>
-		<flag name="postgres">
-		Build with <pkg>dev-db/postgresql</pkg> database support.
-		</flag>
 		<flag name="sqlite">
 		Build with <pkg>dev-db/sqlite</pkg> database support. This disables
 		some functionality and is intended only for embedded use.
