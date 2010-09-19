@@ -3,7 +3,7 @@
 # $Header: $
 
 ARMV=${PV}-11
-I486V=1.0.17-5
+I486V=${PV}-5
 
 DESCRIPTION="A cross-compilation toolkit designed to make embedded Linux application development easier."
 HOMEPAGE="http://www.scratchbox.org/"
