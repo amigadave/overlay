@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-ARMHARDV="hard-${PV}-9"
+ARMHARDV="hard-${PV}-10"
 ARMSOFTV="soft-1.0.19-6"
 I486V="${PV}-5"
 
