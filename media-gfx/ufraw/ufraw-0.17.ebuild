@@ -27,7 +27,7 @@ RDEPEND="
 	gimp? ( >=x11-libs/gtk+-2.6:2
 		>=media-gfx/gtkimageview-1.6.0
 		>=media-gfx/gimp-2.0 )
-	jpeg? ( media-libs/jpeg )
+	jpeg? ( virtual/jpeg )
 	lensfun? ( >=media-libs/lensfun-0.2.5 )
 	png? ( media-libs/libpng )
 	tiff? ( media-libs/tiff )
