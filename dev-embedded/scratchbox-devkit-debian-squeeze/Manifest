@@ -1,0 +1,2 @@
+DIST scratchbox-devkit-debian-squeeze-1.0.6-i386.tar.gz 7896972 RMD160 4e964ba73f601c80a3fdb2537db1e6263a6486f2 SHA1 21ddffe74f018fc10f7fa2d657cc21b270e180df SHA256 ebd520b8f9ce899ddb7b8e44eab50041cb2d4b6f3fd267923e44acd6512fd4c0
+EBUILD scratchbox-devkit-debian-squeeze-1.0.6.ebuild 858 RMD160 1111d026f1ee9c1165ee7767fbff3b4b656162bb SHA1 9db950e4d38bde24f12dcc8d2efa813a982fd151 SHA256 f1d2d102d9c55cf32acefce5105fc0cd6f33bef0bd0cf4fa5ee6d34cf05bc355
