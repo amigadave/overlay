@@ -20,6 +20,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	dev-lang/perl
+	dev-perl/net-server
 	|| ( net-misc/curl[gnutls] net-misc/curl[nss] net-misc/curl[ssl] )"
 
 DOCS=( "ChangeLog" "Manual" "SmtpAuthForward.pl" "SmtpForward.pl" )
