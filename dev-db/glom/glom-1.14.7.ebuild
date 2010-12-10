@@ -19,7 +19,6 @@ RDEPEND="app-arch/gzip
 	>=gnome-extra/libgda-4.1.2:4
 	>=dev-cpp/libgdamm-3.99.18:3.99
 	>=dev-cpp/goocanvasmm-0.14.0
-	>=dev-cpp/gconfmm-2.6.0
 	>=dev-cpp/gtkmm-2.19.7
 	>=dev-cpp/libxmlpp-2.24.0
 	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm:2.0 )
@@ -36,6 +35,11 @@ DEPEND="${RDEPEND}
 	dev-libs/glib"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
+
+src_prepare() {
+	# Fix missing iostream includes in tests.
+	epatch "${FILESDIR}/${PN}-1.14.7-include-iostream-in-tests.patch"
+}
 
 pkg_setup() {
 	G2CONF="${G2CONF}

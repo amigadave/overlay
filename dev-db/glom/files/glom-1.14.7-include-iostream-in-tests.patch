@@ -1,0 +1,130 @@
+diff -ur glom-1.14.7/glom/libglom/example_document_load.cc glom-1.14.7/glom/libglom/example_document_load.cc
+--- glom-1.14.7/glom/libglom/example_document_load.cc	2010-08-10 16:42:47.000000000 +0200
++++ glom-1.14.7/glom/libglom/example_document_load.cc	2010-12-10 12:00:37.230934004 +0100
+@@ -24,6 +24,8 @@
+ #include <libglom/document/document.h>
+ #include <libglom/init.h>
+ 
++#include <iostream>
++
+ void print_layout_group(const Glom::sharedptr<Glom::LayoutGroup>& layout_group, const Glib::ustring& indent)
+ {
+   if(!layout_group)
+diff -ur glom-1.14.7/glom/libglom/test_connectionpool.cc glom-1.14.7/glom/libglom/test_connectionpool.cc
+--- glom-1.14.7/glom/libglom/test_connectionpool.cc	2010-08-10 16:42:47.000000000 +0200
++++ glom-1.14.7/glom/libglom/test_connectionpool.cc	2010-12-10 12:00:13.110934004 +0100
+@@ -21,6 +21,8 @@
+ #include <libgdamm/init.h>
+ #include <libglom/connectionpool.h>
+ 
++#include <iostream>
++
+ #define GLOM_ENABLE_POSTGRESQL
+ 
+ #ifdef GLOM_ENABLE_POSTGRESQL
+diff -ur glom-1.14.7/glom/libglom/test_sharedptr_layoutitem.cc glom-1.14.7/glom/libglom/test_sharedptr_layoutitem.cc
+--- glom-1.14.7/glom/libglom/test_sharedptr_layoutitem.cc	2010-07-25 15:43:04.000000000 +0200
++++ glom-1.14.7/glom/libglom/test_sharedptr_layoutitem.cc	2010-12-10 12:01:06.926934002 +0100
+@@ -21,6 +21,7 @@
+ #include <libglom/data_structure/layout/layoutgroup.h>
+ #include <libglom/data_structure/layout/layoutitem_field.h>
+ 
++#include <iostream>
+ 
+ int
+ main()
+diff -ur glom-1.14.7/tests/test_document_autosave.cc glom-1.14.7/tests/test_document_autosave.cc
+--- glom-1.14.7/tests/test_document_autosave.cc	2010-08-10 15:18:43.000000000 +0200
++++ glom-1.14.7/tests/test_document_autosave.cc	2010-12-10 12:02:25.786934031 +0100
+@@ -22,6 +22,8 @@
+ #include <libglom/init.h>
+ #include <giomm/file.h>
+ 
++#include <iostream>
++
+ Glib::ustring file_uri;
+ 
+ void cleanup()
+diff -ur glom-1.14.7/tests/test_document_load.cc glom-1.14.7/tests/test_document_load.cc
+--- glom-1.14.7/tests/test_document_load.cc	2010-08-10 16:42:47.000000000 +0200
++++ glom-1.14.7/tests/test_document_load.cc	2010-12-10 12:01:52.718934009 +0100
+@@ -22,6 +22,8 @@
+ #include <libglom/init.h>
+ #include <giomm/file.h>
+ 
++#include <iostream>
++
+ template<typename T_Container>
+ bool contains(const T_Container& container, const Glib::ustring& name)
+ {
+diff -ur glom-1.14.7/tests/test_parsing_time.cc glom-1.14.7/tests/test_parsing_time.cc
+--- glom-1.14.7/tests/test_parsing_time.cc	2010-07-25 15:43:04.000000000 +0200
++++ glom-1.14.7/tests/test_parsing_time.cc	2010-12-10 12:02:46.718934000 +0100
+@@ -1,5 +1,7 @@
+ #include <libglom/data_structure/glomconversions.h>
+ 
++#include <iostream>
++
+ int main()
+ {
+   Gnome::Gda::init();
+diff -ur glom-1.14.7/tests/test_python_execute_func_bad_syntax.cc glom-1.14.7/tests/test_python_execute_func_bad_syntax.cc
+--- glom-1.14.7/tests/test_python_execute_func_bad_syntax.cc	2010-07-25 15:43:04.000000000 +0200
++++ glom-1.14.7/tests/test_python_execute_func_bad_syntax.cc	2010-12-10 12:03:58.234934020 +0100
+@@ -4,6 +4,8 @@
+ 
+ #include <boost/python.hpp>
+ 
++#include <iostream>
++
+ int main()
+ {
+   Glom::libglom_init(); //Also initializes python.
+diff -ur glom-1.14.7/tests/test_python_execute_func.cc glom-1.14.7/tests/test_python_execute_func.cc
+--- glom-1.14.7/tests/test_python_execute_func.cc	2010-07-25 15:43:04.000000000 +0200
++++ glom-1.14.7/tests/test_python_execute_func.cc	2010-12-10 12:03:18.750934007 +0100
+@@ -4,6 +4,8 @@
+ 
+ #include <boost/python.hpp>
+ 
++#include <iostream>
++
+ int main()
+ {
+   Glom::libglom_init(); //Also initializes python.
+diff -ur glom-1.14.7/tests/test_python_execute_func_change_result_type.cc glom-1.14.7/tests/test_python_execute_func_change_result_type.cc
+--- glom-1.14.7/tests/test_python_execute_func_change_result_type.cc	2010-07-25 15:43:04.000000000 +0200
++++ glom-1.14.7/tests/test_python_execute_func_change_result_type.cc	2010-12-10 12:04:27.941960136 +0100
+@@ -4,6 +4,8 @@
+ 
+ #include <boost/python.hpp>
+ 
++#include <iostream>
++
+ int main()
+ {
+   Glom::libglom_init(); //Also initializes python.
+diff -ur glom-1.14.7/tests/test_python_execute_script.cc glom-1.14.7/tests/test_python_execute_script.cc
+--- glom-1.14.7/tests/test_python_execute_script.cc	2010-08-10 16:42:47.000000000 +0200
++++ glom-1.14.7/tests/test_python_execute_script.cc	2010-12-10 12:04:59.486180008 +0100
+@@ -1,6 +1,8 @@
+ #include <glom/libglom/init.h>
+ #include <glom/python_embed/glom_python.h>
+ 
++#include <iostream>
++
+ //Store results from the callbacks and check them later:
+ Glib::ustring result_table_name_list;
+ Glib::ustring result_table_name_details;
+diff -ur glom-1.14.7/tests/test_selfhosting_new_empty.cc glom-1.14.7/tests/test_selfhosting_new_empty.cc
+--- glom-1.14.7/tests/test_selfhosting_new_empty.cc	2010-08-10 16:42:47.000000000 +0200
++++ glom-1.14.7/tests/test_selfhosting_new_empty.cc	2010-12-10 12:05:55.271636006 +0100
+@@ -25,6 +25,8 @@
+ #include <glom/glom_privs.h>
+ #include <giomm/file.h>
+ 
++#include <iostream>
++
+ static void on_initialize_progress()
+ {
+   std::cout << "Database initialization progress" << std::endl;
