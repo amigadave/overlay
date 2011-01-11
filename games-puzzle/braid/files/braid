@@ -1,0 +1,105 @@
+#!/bin/bash
+#Braid, starting script.
+
+HOME_DIR="${HOME}/.Braid"
+CONFIG_FILE="${HOME_DIR}/settings.cfg"
+
+GAME_DIR="#GAMEDIR#"
+EXEC="#PN#"
+
+#Main:
+if [[ ! -d "${HOME_DIR}" ]]
+then
+  mkdir -p "${HOME_DIR}"
+fi
+
+if [[ ! -r "${CONFIG_FILE}" ]]
+then
+  echo "Generating: \"${CONFIG_FILE}\"." >&2
+  cat << EOF >> "${CONFIG_FILE}"
+#Braid's settings file.
+#---------------------------------------------------------------------------------------------------------------------
+
+## Language: Multiple Strings: auto; english, german, french, italian, spanish, portuguese, japanese, korean, chinese.
+Language="auto"
+
+#---------------------------------------------------------------------------------------------------------------------
+
+## Video Settings:
+### Resolution: Width and Height: Multiple Values: Eg.: 600, 800, 1024, 1280.
+Width="800"
+Height="600"
+
+### Windowed: Boolean: 0, 1.
+Windowed="1"
+
+### Vertical Sync: Boolean: 0, 1.
+VSync="0"
+
+### Half Rendering: Boolean: 0, 1.
+Half="0"
+
+### Force Frames per Second: Multiple Values: 60, 30, 20, 15.
+Fps="60"
+
+#---------------------------------------------------------------------------------------------------------------------
+
+# Audio Settings:
+## Music: Boolean: 0, 1.
+Music="1"
+
+#---------------------------------------------------------------------------------------------------------------------
+EOF
+fi
+if [[ "${1}" == "--init" ]]
+then
+  exit 0
+fi
+
+echo "Reading: \"${CONFIG_FILE}\"." >&2
+source "${CONFIG_FILE}"
+PARAMS=""
+
+if [[ "${Language:-auto}" != "auto" ]]
+then
+  PARAMS="${PARAMS} -language ${Language}"
+fi
+
+if [[ "${Width}" != "" && "${Height}" != "" ]]
+then
+  PARAMS="${PARAMS} -width ${Width} -height ${Height}"
+fi
+
+if [[ "${Windowed:-0}" == "1" ]]
+then
+  PARAMS="${PARAMS} -windowed"
+fi
+
+if [[ "${Half:-0}" == "1" ]]
+then
+  PARAMS="${PARAMS} -half"
+fi
+
+if [[ "${Music:-1}" == "0" ]]
+then
+  PARAMS="${PARAMS} -no_music"
+fi
+
+case "${VSync}" in
+  "0") PARAMS="${PARAMS} -no_vsync";;
+  "1") PARAMS="${PARAMS} -vsync";;
+esac
+
+case "${Fps}" in
+  "15") PARAMS="${PARAMS} -15fps";;
+  "20") PARAMS="${PARAMS} -20fps";;
+  "30") PARAMS="${PARAMS} -30fps";;
+  "60") PARAMS="${PARAMS} -60fps";;
+esac
+
+PARAMS="${PARAMS} ${@}"
+
+cd "${GAME_DIR}"
+echo "Starting \"${EXEC}\" with Params: \"${PARAMS}\"." >&2
+eval "./${EXEC} ${PARAMS}"
+exit "${?}"
