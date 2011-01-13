@@ -46,7 +46,7 @@ src_unpack() {
 	cdrom_get_cds majesty.xpm
 
 	ln -sfn "${CDROM_ROOT}" cd || die "CD symlink failed"
-	einfo "Copying files from game CD"
+	ebegin "Copying files from game CD"
 	cp -rf ./cd/CREDITS ./cd/README* ./cd/majestysite.url . || die "cp READMEs failed"
 	cp -rf ./cd/majesty.{bmp,xpm} . || die "cp icons failed"
 	cp -rf ./cd/bin/Linux/x86/glibc-2.1/* . || die "cp exes failed"
@@ -60,14 +60,14 @@ src_unpack() {
 	# crash, so the hi-res movies are always installed.
 	cp -rf ./cd/movies . || die "cp movies failed"
 
-	einfo "Unpacking game data"
+	ebegin "Unpacking game data"
 	for datafile in data datamx quests questsmx; do
 		unpack "./cd/${datafile}.tar.gz"
 	done
 
 	rm -f cd
 
-	einfo "Unpacking patches"
+	ebegin "Unpacking patches"
 	for patches in "one ${MY_PATCH_ONE}" "two ${MY_PATCH_TWO}" \
 		"three ${MY_PATCH_THREE}" ; do
 
@@ -80,7 +80,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	einfo "Patching binaries"
+	ebegin "Patching binaries"
 	local patchdirs="patch/one patch/two patch/three"
 	if use x86; then
 		for patchdir in $patchdirs; do
