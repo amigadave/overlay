@@ -4,12 +4,14 @@
 
 EAPI=3
 
-inherit games
+inherit games versionator
 
+MY_PV=$(delete_all_version_separators)
+MY_PN="RevengeOfTheTitans-HIB"
 DESCRIPTION="Command your forces against the Titan horde"
 HOMEPAGE="http://www.puppygames.net/revenge-of-the-titans/"
-SRC_URI="amd64? ( RevengeOfTheTitans181-HIB-amd64.tar.gz )
-	x86? ( RevengeOfTheTitans181-HIB-i386.tar.gz )"
+SRC_URI="amd64? ( ${MY_PN}-${MY_PV}-amd64.tar.gz )
+	x86? ( ${MY_PN}-${MY_PV}-i386.tar.gz )"
 
 LICENSE="as-is"
 SLOT="0"
