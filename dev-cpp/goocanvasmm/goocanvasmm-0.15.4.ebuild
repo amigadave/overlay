@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 RDEPEND=">=dev-cpp/glibmm-2.14.2
-	>=dev-cpp/gtkmm-2.10.9
+	>=dev-cpp/gtkmm-2.22.0
 	>=x11-libs/goocanvas-0.15"
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
