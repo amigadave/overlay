@@ -16,18 +16,16 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="-client-only doc sqlite"
 
-RDEPEND=">=gnome-extra/libgda-4.1.2:4
+RDEPEND=">=gnome-extra/libgda-4.1.2:4[postgres]
 	>=dev-cpp/libgdamm-3.99.21:3.99
-	>=dev-cpp/goocanvasmm-0.14.0
-	>=dev-cpp/gconfmm-2.6.0
-	>=dev-cpp/gtkmm-2.19.7:3.0
+	>=dev-cpp/goocanvasmm-2.91.5:2.0
+	>=dev-cpp/gtkmm-2.99.1:3.0
 	>=dev-cpp/libxmlpp-2.24.0
-	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm:2.0 )
+	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm:3.0 )
 	dev-libs/boost[python]
 	>=dev-libs/libxslt-1.1.10
 	>=dev-python/pygobject-2.6.0
 	>=dev-python/libgda-python-2.25.3
-	gnome-extra/libgda:4[postgres]
 	>=net-libs/libepc-0.3.1
 	dev-db/postgresql-server"
 DEPEND="${RDEPEND}
