@@ -17,7 +17,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="-client-only doc sqlite"
 
 RDEPEND=">=gnome-extra/libgda-4.1.2:4[postgres]
-	>=dev-cpp/libgdamm-3.99.21:3.99
+	>=dev-cpp/libgdamm-4.1.2:4
 	>=dev-cpp/goocanvasmm-2.91.5:2.0
 	>=dev-cpp/gtkmm-2.99.1:3.0
 	>=dev-cpp/libxmlpp-2.24.0
@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 	>=dev-cpp/mm-common-0.8
 	>=dev-util/intltool-0.35.0
 	dev-util/pkgconfig
-	doc? ( app-doc/doxygen dev-python/sphinx )
+	doc? ( app-doc/doxygen app-text/gnome-doc-utils dev-python/sphinx )
 	dev-libs/glib"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"

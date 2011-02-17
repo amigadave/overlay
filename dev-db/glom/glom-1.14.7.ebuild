@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND="app-arch/gzip
 	app-arch/tar
 	>=gnome-extra/libgda-4.1.2:4
-	>=dev-cpp/libgdamm-3.99.18:3.99
+	>=dev-cpp/libgdamm-3.99.18:4
 	>=dev-cpp/goocanvasmm-0.14.0
 	>=dev-cpp/gtkmm-2.19.7
 	>=dev-cpp/libxmlpp-2.24.0
