@@ -18,7 +18,7 @@ RDEPEND="app-arch/gzip
 	app-arch/tar
 	>=gnome-extra/libgda-4.1.2:4
 	>=dev-cpp/libgdamm-3.99.18:4
-	>=dev-cpp/goocanvasmm-0.14.0
+	>=dev-cpp/goocanvasmm-0.14.0:1.0
 	>=dev-cpp/gtkmm-2.19.7
 	>=dev-cpp/libxmlpp-2.24.0
 	!client-only? ( app-text/iso-codes dev-cpp/gtksourceviewmm:2.0 )
