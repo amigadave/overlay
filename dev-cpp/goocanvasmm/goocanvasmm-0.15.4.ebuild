@@ -10,12 +10,12 @@ DESCRIPTION="C++ bindings for goocanvas"
 HOMEPAGE="http://www.gtkmm.org/"
 
 LICENSE="LGPL-2.1"
-SLOT="0"
+SLOT="1.0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 RDEPEND=">=dev-cpp/glibmm-2.14.2
-	>=dev-cpp/gtkmm-2.22.0
+	>=dev-cpp/gtkmm-2.22.0:2.4
 	>=x11-libs/goocanvas-0.15"
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
