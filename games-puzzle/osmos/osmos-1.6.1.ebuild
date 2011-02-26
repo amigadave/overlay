@@ -30,18 +30,6 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${MY_PN}
 
-src_prepare() {
-	# Fix for font error, Gentoo bug #340557
-	# See http://www.hemispheregames.com/forum/viewtopic.php?f=8&t=498&start=0
-	# Thanks to Martin von Gagern for proposed way and research!
-	echo -n $'\x5d\x19\xc3\x5c' | \
-		dd of=Fonts/FortuneCity.ttf bs=1 conv=notrunc seek=128 \
-		|| die "Binary patching failed"
-	echo -n $'\x80\x77' | \
-		dd of=Fonts/FortuneCity.ttf bs=1 conv=notrunc seek=138 \
-		|| die "Binary patching failed"
-}
-
 src_install() {
 	local dir="${GAMES_PREFIX_OPT}/${PN}"
 
