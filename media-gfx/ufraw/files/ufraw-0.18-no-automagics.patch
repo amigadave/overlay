@@ -1,6 +1,6 @@
-diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
---- ufraw-0.17.old/configure.ac	2010-04-01 00:44:24.000000000 +0200
-+++ ufraw-0.17/configure.ac	2010-08-08 12:38:05.244278366 +0200
+diff -urN ufraw-0.18.old/configure.ac ufraw-0.18/configure.ac
+--- ufraw-0.18.old/configure.ac	2010-11-21 03:52:25.000000000 +0100
++++ ufraw-0.18/configure.ac	2011-04-07 11:39:49.674268118 +0200
 @@ -223,46 +223,106 @@
  AC_CHECK_FUNCS(memmem)
  
@@ -8,24 +8,24 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 -AC_CHECK_LIB(z, deflate)
 +AC_ARG_WITH([zlib],
 +  [AS_HELP_STRING([--with-zlib],
-+  [build zlib support <:@default=check@:>@])],
++  [build zlib support <:@default-check@:>@])],
 +  [],
 +  [with_zlib=check])
 +
-+AS_IF([test "x$with_zlib" != xno],
-+  [AC_CHECK_LIB([z], [deflate]) ] )
++AS_IF([test "x$with_zlib" != "xno"],
++  [AC_CHECK_LIB([z], [deflate])])
  have_zlib=${ac_cv_lib_z_deflate:-no}
  
  # Check for libbz2
 -AC_CHECK_LIB(bz2, BZ2_bzReadOpen)
 +AC_ARG_WITH([bzip2],
 +  [AS_HELP_STRING([--with-bzip2],
-+  [build bzip2 support <:@default=check@:>@])],
++  [build bzip2 support <:@default-check@:>@])],
 +  [],
 +  [with_bzip2=check])
 +
-+AS_IF([test "x$with_bzip2" != xno],
-+  [AC_CHECK_LIB([bz2], [BZ2_bzReadOpen]) ] )
++AS_IF([test "x$with_bzip2" != "xno"],
++  [AC_CHECK_LIB([bz2], [BZ2_bzReadOpen])])
  have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
  
  # Check for jpeg headers and library.
@@ -33,13 +33,13 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 -  AC_CHECK_LIB(jpeg, jpeg_CreateCompress))
 +AC_ARG_WITH([jpeg],
 +  [AS_HELP_STRING([--with-jpeg],
-+  [build jpeg support <:@default=check@:>@])],
++  [build jpeg support <:@default-check@:>@])],
 +  [],
 +  [with_jpeg=check])
 +
-+AS_IF([test "x$with_jpeg" != xno],
++AS_IF([test "x$with_jpeg" != "xno"],
 +  [AC_CHECK_HEADER([jpeglib.h],
-+    [AC_CHECK_LIB([jpeg], [jpeg_CreateCompress])] ) ] )
++    [AC_CHECK_LIB([jpeg], [jpeg_CreateCompress])])])
  have_jpeg=${ac_cv_lib_jpeg_jpeg_CreateCompress:-no}
  
  # Check for tiff headers and library.
@@ -47,13 +47,13 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 -  AC_CHECK_LIB(tiff, TIFFSetErrorHandler))
 +AC_ARG_WITH([tiff],
 +  [AS_HELP_STRING([--with-tiff],
-+  [build tiff support <:@default=check@:>@])],
++  [build jpeg support <:@default-check@:>@])],
 +  [],
 +  [with_tiff=check])
 +
-+AS_IF([test "x$with_tiff" != xno],
++AS_IF([test "x$with_tiff" != "xno"],
 +  [AC_CHECK_HEADER([tiffio.h],
-+    [AC_CHECK_LIB([tiff], [TIFFSetErrorHandler]) ] ) ] )
++    [AC_CHECK_LIB([tiff], [TIFFSetErrorHandler])])])
  have_tiff=${ac_cv_lib_tiff_TIFFSetErrorHandler:-no}
  
 -PKG_CHECK_MODULES(LIBPNG, libpng,
@@ -68,7 +68,7 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 -  [ have_cfitsio=no
 -    AC_MSG_RESULT($CFITSIO_PKG_ERRORS) ] )
 -
--PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.16,
+-PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.18.1,
 -  [ have_exiv2=yes
 -    AC_DEFINE(HAVE_EXIV2, 1, have the exiv2 library) ],
 -  [ have_exiv2=no
@@ -91,7 +91,7 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 +    [ have_png=yes
 +      AC_DEFINE(HAVE_LIBPNG, 1, have the png library) ],
 +    [ have_png=no
-+      AC_MSG_RESULT($LIBPNG_PKG_ERRORS) ] ) ] )
++      AC_MSG_RESULT($LIBPNG_PKG_ERRORS)])])
 +
 +AC_ARG_WITH([cfitsio],
 +  [AS_HELP_STRING([--with-cfitsio],
@@ -105,7 +105,7 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 +    [ have_cfitsio=yes
 +      AC_DEFINE(HAVE_LIBCFITSIO, 1, have the cfitsio library) ],
 +    [ have_cfitsio=no
-+      AC_MSG_RESULT($CFITSIO_PKG_ERRORS) ] ) ] )
++      AC_MSG_RESULT($CFITSIO_PKG_ERRORS)])])
 +
 +AC_ARG_WITH([exiv2],
 +  [AS_HELP_STRING([--with-exiv2],
@@ -119,7 +119,7 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 +    [ have_exiv2=yes
 +      AC_DEFINE(HAVE_EXIV2, 1, have the exiv2 library) ],
 +    [ have_exiv2=no
-+      AC_MSG_RESULT($EXIV2_PKG_ERRORS) ] ) ] )
++      AC_MSG_RESULT($EXIV2_PKG_ERRORS)])])
 +
 +AC_ARG_WITH([lensfun],
 +  [AS_HELP_STRING([--with-lensfun],
@@ -133,7 +133,7 @@ diff -urN ufraw-0.17.old/configure.ac ufraw-0.17/configure.ac
 +    [ have_lensfun=yes
 +      AC_DEFINE(HAVE_LENSFUN, 1, have the lensfun library) ],
 +    [ have_lensfun=no
-+      AC_MSG_RESULT($LENSFUN_PKG_ERRORS) ] ) ] )
++      AC_MSG_RESULT($LENSFUN_PKG_ERRORS)])])
  
  # UFRAW_CPPFLAGS is added to the preprocessor flags AM_CPPFLAGS,
  # affecting also the C and C++ compilers.
