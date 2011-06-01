@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-ARMHARDV="hard-${PV}-13"
+ARMHARDV="hard-${PV}-18"
 ARMSOFTV="soft-1.0.19-6"
-I486V="${PV}-8"
+I486V="${PV}-12"
 
 DESCRIPTION="A cross-compilation toolkit designed to make embedded Linux application development easier."
 HOMEPAGE="http://www.scratchbox.org/"
