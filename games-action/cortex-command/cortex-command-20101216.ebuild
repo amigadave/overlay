@@ -22,7 +22,7 @@ RESTRICT="fetch strip"
 QA_EXECSTACK="${GAMES_PREFIX_OPT:1}/${PN}/CortexCommand.bin"
 
 DEPEND="app-arch/unzip"
-RDEPEND=">=media-libs/allegro-4.4[vorbis]
+RDEPEND=">=media-libs/allegro-4.4:0[vorbis]
 	media-libs/openal
 	net-misc/curl"
 
