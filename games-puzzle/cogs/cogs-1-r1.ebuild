@@ -9,7 +9,7 @@ inherit eutils games
 HIBPAGE="http://www.humblebundle.com/"
 DESCRIPTION="A steampunk puzzle game involving cogs, pipes and music"
 HOMEPAGE="http://www.cogs-game.com/"
-SRC_URI="cogs-linux-bin"
+SRC_URI="cogs-installer-build4"
 
 LICENSE="as-is"
 
@@ -52,6 +52,12 @@ src_install() {
 	exeinto "${dir}"
 
 	doexe Cogs
+	if use amd64 ; then
+		doexe Cogs-amd64
+	else
+		doexe Cogs-x86
+	fi
+
 	newicon cogs.png "${PN}.png"
 	doins -r data
 	dodoc README-linux.txt
