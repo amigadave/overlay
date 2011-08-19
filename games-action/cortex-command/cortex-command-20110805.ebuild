@@ -7,7 +7,7 @@ EAPI=3
 inherit games
 
 MY_PN="cortex_command"
-MY_V="b24-12162010"
+MY_V="b25-1"
 
 DESCRIPTION="Action game similar to Worms"
 HOMEPAGE="http://www.cortexcommand.com/"
