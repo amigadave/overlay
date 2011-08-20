@@ -9,7 +9,7 @@ inherit eutils games
 HIBPAGE="http://www.humblebundle.com/"
 DESCRIPTION="Physics-based combat with flying machines"
 HOMEPAGE="http://www.koshutin.com/"
-SRC_URI="hf-linux-07172011-bin"
+SRC_URI="hf-linux-08122011-bin"
 
 LICENSE="as-is"
 
@@ -51,6 +51,12 @@ src_install() {
 	exeinto "${dir}"
 
 	doexe Hammerfight
+	if use amd64 ; then
+		doexe Hammerfight-amd64
+	else
+		doexe Hammerfight-x86
+	fi
+
 	newicon hammerfight.png "${PN}.png"
 	doins Config.ini media.script strings.txt
 	doins -r Data Demo Media Objects Saves
