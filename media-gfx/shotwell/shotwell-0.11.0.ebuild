@@ -4,14 +4,14 @@
 
 EAPI=4
 GCONF_DEBUG="no"
-EGIT_REPO_URI="git://yorba.org/shotwell"
-EGIT_NOUNPACK="true"
 
-inherit git-2 gnome2 eutils multilib toolchain-funcs
+inherit gnome2 eutils multilib toolchain-funcs versionator
+
+MY_MAJORV="$(get_version_component_range 1-2)"
 
 DESCRIPTION="Open source photo manager for GNOME"
 HOMEPAGE="http://www.yorba.org/shotwell/"
-SRC_URI=""
+SRC_URI="http://yorba.org/download/shotwell/${MY_MAJORV}/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -25,21 +25,23 @@ RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=dev-libs/libunique-1:1
 	>=dev-libs/libxml2-2.6.32:2
 	>=gnome-base/gconf-2.22.0:2
+	>=gnome-base/librsvg-2.14.0:2
 	>=media-libs/gexiv2-0.2.0
-	media-libs/gstreamer:0.10
+	>=media-libs/gstreamer-0.10.28:0.10
+	>=media-libs/gst-plugins-base-0.10.32:0.10
 	media-libs/lcms:2
 	>=media-libs/libexif-0.6.16
 	>=media-libs/libgphoto2-2.4.2
 	>=media-libs/libraw-0.9.0
 	>=net-libs/libsoup-2.26.0:2.4
 	>=net-libs/webkit-gtk-1.1.5:2
+	>=sys-devel/m4-1.4.13
 	|| ( >=sys-fs/udev-171[gudev] >=sys-fs/udev-145[extras] )
 	>=x11-libs/gtk+-2.18.0:2"
 DEPEND="${RDEPEND}
 	>=dev-lang/vala-0.11.7:0.12"
 
 DOCS=( AUTHORS MAINTAINERS NEWS README THANKS )
-S="${WORKDIR}/${PN}"
 
 pkg_setup() {
 	tc-export CC
@@ -48,10 +50,6 @@ pkg_setup() {
 		--disable-desktop-update
 		--disable-icon-update
 		--lib=$(get_libdir)"
-}
-
-src_unpack() {
-	git-2_src_unpack
 }
 
 src_prepare() {
