@@ -18,14 +18,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-db/sqlite-3.5.9:3
+COMMON_DEPEND=">=dev-db/sqlite-3.5.9:3
 	>=dev-libs/dbus-glib-0.80
 	>=dev-libs/json-glib-0.7.6
 	>=dev-libs/libgee-0.5.0
 	>=dev-libs/libunique-1:1
 	>=dev-libs/libxml2-2.6.32:2
 	>=gnome-base/gconf-2.22.0:2
-	>=gnome-base/librsvg-2.14.0:2
 	>=media-libs/gexiv2-0.2.0
 	>=media-libs/gstreamer-0.10.28:0.10
 	>=media-libs/gst-plugins-base-0.10.32:0.10
@@ -38,7 +37,9 @@ RDEPEND=">=dev-db/sqlite-3.5.9:3
 	>=sys-devel/m4-1.4.13
 	|| ( >=sys-fs/udev-171[gudev] >=sys-fs/udev-145[extras] )
 	>=x11-libs/gtk+-2.18.0:2"
-DEPEND="${RDEPEND}
+RDEPEND="${COMMON_DEPEND}
+	>=gnome-base/librsvg-2.14.0:2"
+DEPEND="${COMMON_DEPEND}
 	>=dev-lang/vala-0.11.7:0.12"
 
 DOCS=( AUTHORS MAINTAINERS NEWS README THANKS )
