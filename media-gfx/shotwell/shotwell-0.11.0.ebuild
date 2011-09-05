@@ -18,8 +18,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+# GLib depend is due to usage of GSettings
+# TODO: GConf depend is bogus, patch it out
 COMMON_DEPEND=">=dev-db/sqlite-3.5.9:3
 	>=dev-libs/dbus-glib-0.80
+	>=dev-libs/glib-2.26.0:2
 	>=dev-libs/json-glib-0.7.6
 	>=dev-libs/libgee-0.5.0
 	>=dev-libs/libunique-1:1
@@ -60,11 +63,4 @@ src_prepare() {
 
 	sed -e 's/valac/valac-0.12/' -i plugins/Makefile.plugin.mk || die
 	sed -e 's/valac/valac-0.12/' -i Makefile || die
-}
-
-src_install() {
-	# This is needed so that gnome2_gconf_savelist() works correctly.
-	insinto /etc/gconf/schemas
-	doins misc/shotwell.schemas || die "install gconf schema failed"
-	gnome2_src_install
 }
