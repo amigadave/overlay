@@ -1,7 +1,3 @@
 # David King <amigadave@amigadave.com> (17 Sep 2010)
 # Mask live ebuild.
 =media-gfx/shotwell-9999
-
-# David King <amigadave@amigadave.com> (17 Sep 2010)
-# Mask live ebuild.
-=dev-db/glom-9999
