@@ -1,16 +1,15 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
+
 inherit eutils games versionator
 
-MY_PV=$(delete_all_version_separators ${MY_PV})
-MY_P="${PN}${MY_PV}"
-MY_R="-1"
 
 DESCRIPTION="Play as an amorphous ball of tar that rolls and squishes around"
 HOMEPAGE="http://www.chroniclogic.com/gish.htm"
-SRC_URI="${MY_P}${MY_R}.tar.gz ${PN}.png.gz"
+SRC_URI="${PN}_${PV}_all.tar.gz ${PN}.png.gz"
 
 LICENSE="as-is"
 SLOT="0"
@@ -25,7 +24,7 @@ RDEPEND="media-libs/libsdl
 	media-libs/openal
 	virtual/opengl"
 
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/gish"
 
 pkg_nofetch() {
 	einfo "This game must be purchased from ${HOMEPAGE}."
@@ -42,12 +41,14 @@ src_install() {
 
 	exeinto "${dir}"
 	if use amd64; then
-		doexe ${PN}64 || die
-		games_make_wrapper ${PN} ./${PN}64 "${dir}" || die
+		doexe ${PN}_64 || die
+		games_make_wrapper ${PN} ./${PN}_64 "${dir}" || die
 	else
-		doexe ${PN} || die
-		games_make_wrapper ${PN} ./${PN} "${dir}" || die
+		doexe ${PN}_32 || die
+		games_make_wrapper ${PN} ./${PN}_32 "${dir}" || die
 	fi
+
+	dodoc README.txt gisheditor.txt Patch_1_6.txt || die
 
 	doicon "${WORKDIR}/${PN}.png" || die
 	make_desktop_entry ${PN} "Gish" || die
@@ -56,10 +57,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	ewarn "This game is known to crash shortly after starting level 1-6. You can"
-	ewarn "work around this by turning off the music just for that level. This has"
-	ewarn "been reported upstream."
-	ewarn
 	ewarn "Due to a bug in this version of Gish, saving games and configuration settings"
 	ewarn "is broken by default. To enable, you must run the following command as root:"
 	ewarn "   chmod g+w ${GAMES_PREFIX_OPT}/${PN}"
