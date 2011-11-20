@@ -1,10 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=4
 
-inherit flag-o-matic
+inherit flag-o-matic multilib
 
 MY_PV="${PV/_p/-}"
 
@@ -12,7 +12,7 @@ SRC_BASE="http://libavl.sourcearchive.com/downloads/${MY_PV}"
 PATCH_NAME="libavl_${MY_PV}.diff"
 
 DESCRIPTION="Implementation of AVL trees for C"
-HOMEPAGE="http://libavl.sourcearchive.com"
+HOMEPAGE="http://libavl.sourcearchive.com/"
 SRC_URI="${SRC_BASE}/libavl_${PV%_p*}.orig.tar.gz"
 
 if [ x$PV != x$MY_PV ]; then
@@ -35,14 +35,9 @@ src_prepare() {
 	fi
 }
 
-src_compile() {
-	emake || die "emake failed"
-}
-
 src_install() {
-	dolib libavl.so.1.5 || die
-	dosym libavl.so.1.5 /usr/lib/libavl.so || die
-	dodoc README || die
-	insinto /usr/include
-	doins avl.h || die
+	local inst_prefix="${EPREFIX}/usr"
+	emake prefix="${inst_prefix}" libdir="${inst_prefix}/$(get_libdir)" \
+		DESTDIR="${D}" install
+	dodoc README
 }
