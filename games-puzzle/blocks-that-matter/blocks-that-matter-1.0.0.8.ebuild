@@ -6,10 +6,12 @@ EAPI=3
 
 inherit eutils games
 
+MY_P="blocks-matter_${PV}"
 HIBPAGE="http://www.humblebundle.com/"
 DESCRIPTION="Platform puzzler with the player taking the role of the Tetrobot"
 HOMEPAGE="http://www.swingswingsubmarine.com/games/blocks-that-matter/"
-SRC_URI="blocks-matter_${PV}_all.tar.gz"
+SRC_URI="amd64? ( ${MY_P}_x64.tar.gz )
+	x86? ( ${MY_P}_x86.tar.gz )"
 
 LICENSE="as-is"
 SLOT="0"
@@ -17,12 +19,15 @@ KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
 RESTRICT="fetch strip"
 
-DEPEND="media-gfx/icoutils"
 RDEPEND="media-libs/openal
 	virtual/jre
 	virtual/opengl"
 
-S="${WORKDIR}/BlocksThatMatter.Full.Linux.${PV}"
+if use amd64 ; then
+	S="${WORKDIR}/${MY_P}_x64"
+else
+	S="${WORKDIR}/${MY_P}_x86"
+fi
 
 pkg_nofetch() {
 	einfo "Please buy and download ${SRC_URI} from:"
@@ -31,34 +36,30 @@ pkg_nofetch() {
 	einfo "  ${DISTDIR}"
 }
 
-src_prepare() {
-	icotool --extract BTM.ico || die "icon conversion failed"
-	mv BTM_1_64x64x24.png ${PN}.png
-}
-
 src_install() {
 	local dir="${GAMES_PREFIX_OPT}/${PN}"
 
 	insinto "${dir}"
 	exeinto "${dir}"
 
-	doexe BTM
-	doins BTM.bftm BTM.jar
-	doicon ${PN}.png
-	doins -r BTM_lib config
-	dodoc README/USER_DATAS_FILES.txt README/ChangeLog.txt README/README.txt
-	dodir "${dir}/java_libs"
+	doexe BTM || die
+	doins BTM.bftm BTM.jar || die
+	newicon BTM.png ${PN}.png || die
+	doins -r BTM_lib config || die
+	dodoc README/USER_DATAS_FILES.txt README/ChangeLog.txt README/README.txt \
+		|| die
+	dodir "${dir}/java_libs" || die
 	insinto "${dir}/java_libs"
 	if use amd64 ; then
-		doins libjinput-linux64.so liblwjgl64.so
+		doins libjinput-linux64.so liblwjgl64.so || die
 	else
 		# Only other architecture is x86.
-		doins libjinput-linux.so liblwjgl.so
+		doins libjinput-linux.so liblwjgl.so || die
 	fi
 
 	games_make_wrapper "${PN}" "java -Xmx1024M -Xms512M \
-		-Djava.library.path=java_libs -jar BTM.jar" "${dir}"
-	make_desktop_entry "${PN}" "Blocks That Matter"
+		-Djava.library.path=java_libs -jar BTM.jar" "${dir}" || die
+	make_desktop_entry "${PN}" "Blocks That Matter" || die
 
 	prepgamesdirs
 }
