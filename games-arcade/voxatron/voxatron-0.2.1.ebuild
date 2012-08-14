@@ -37,7 +37,9 @@ src_install() {
 
 	doexe vox
 	doins vox.dat
-	dodoc vox.txt
+	dodoc voxatron.txt
+
+	newicon lexaloffle-vox.png ${PN}.png
 
 	games_make_wrapper "${PN}" "./vox" "${dir}"
 	make_desktop_entry "${PN}" "Voxatron"
