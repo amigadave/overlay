@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -51,5 +51,9 @@ src_prepare() {
 		"${FILESDIR}/${PN}-5.100.82.38-gcc.patch" \
 		"${FILESDIR}/${PN}-5.100.82.111-linux-3.0.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-linux-2.6.39.patch" \
-		"${FILESDIR}/${PN}-5.100.82.112-linux-3.2.patch"
+		"${FILESDIR}/${PN}-5.100.82.112-linux-3.2.patch" \
+		"${FILESDIR}/${PN}-5.100.82.112-linux-3.4.patch" \
+		"${FILESDIR}/${PN}-5.100.82.112-linux-3.6.patch" \
+		"${FILESDIR}/${PN}-5.100.82.112-rename-to-wlan0.patch" \
+		"${FILESDIR}/${PN}-5.100.82.112-user_ioctl.patch"
 }
