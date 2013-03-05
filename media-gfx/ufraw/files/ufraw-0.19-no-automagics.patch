@@ -1,39 +1,41 @@
-diff -urN ufraw-0.18.old/configure.ac ufraw-0.18/configure.ac
---- ufraw-0.18.old/configure.ac	2010-11-21 03:52:25.000000000 +0100
-+++ ufraw-0.18/configure.ac	2011-04-07 11:39:49.674268118 +0200
-@@ -223,46 +223,106 @@
+diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
+--- ufraw-0.19.old/configure.ac	2013-02-23 21:26:34.000000000 +0000
++++ ufraw-0.19/configure.ac	2013-03-05 21:57:37.038562566 +0000
+@@ -226,50 +226,119 @@
  AC_CHECK_FUNCS(memmem)
  
  # Check for zlib.
 -AC_CHECK_LIB(z, deflate)
+-have_zlib=${ac_cv_lib_z_deflate:-no}
 +AC_ARG_WITH([zlib],
 +  [AS_HELP_STRING([--with-zlib],
-+  [build zlib support <:@default-check@:>@])],
++  [build zlib support <:@default=check@:>@])],
 +  [],
 +  [with_zlib=check])
-+
+ 
 +AS_IF([test "x$with_zlib" != "xno"],
 +  [AC_CHECK_LIB([z], [deflate])])
- have_zlib=${ac_cv_lib_z_deflate:-no}
- 
++have_zlib=${ac_cv_lib_z_deflate:-no}
++ 
  # Check for libbz2
 -AC_CHECK_LIB(bz2, BZ2_bzReadOpen)
+-have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
 +AC_ARG_WITH([bzip2],
 +  [AS_HELP_STRING([--with-bzip2],
-+  [build bzip2 support <:@default-check@:>@])],
++  [build bzip2 support <:@default=check@:>@])],
 +  [],
 +  [with_bzip2=check])
-+
+ 
 +AS_IF([test "x$with_bzip2" != "xno"],
 +  [AC_CHECK_LIB([bz2], [BZ2_bzReadOpen])])
- have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
- 
++have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
++ 
  # Check for jpeg headers and library.
 -AC_CHECK_HEADER(jpeglib.h,
 -  AC_CHECK_LIB(jpeg, jpeg_CreateCompress))
 +AC_ARG_WITH([jpeg],
 +  [AS_HELP_STRING([--with-jpeg],
-+  [build jpeg support <:@default-check@:>@])],
++  [build jpeg support <:@default=check@:>@])],
 +  [],
 +  [with_jpeg=check])
 +
@@ -42,18 +44,30 @@ diff -urN ufraw-0.18.old/configure.ac ufraw-0.18/configure.ac
 +    [AC_CHECK_LIB([jpeg], [jpeg_CreateCompress])])])
  have_jpeg=${ac_cv_lib_jpeg_jpeg_CreateCompress:-no}
  
+ # Check for libjasper.
+-AC_CHECK_LIB(jasper, jas_image_decode)
++AC_ARG_WITH([jasper],
++  [AS_HELP_STRING([--with-jasper],
++  [build jasper support <:@default=check@:>@])],
++  [],
++  [with_jasper=check])
++
++AS_IF([test "x$with_jasper" != "xno"],
++  [AC_CHECK_LIB([jasper], [jas_image_decode])])
+ have_jasper=${ac_cv_lib_jasper_jas_image_decode:-no}
+ 
  # Check for tiff headers and library.
--AC_CHECK_HEADER(tiffio.h,
--  AC_CHECK_LIB(tiff, TIFFSetErrorHandler))
 +AC_ARG_WITH([tiff],
 +  [AS_HELP_STRING([--with-tiff],
-+  [build jpeg support <:@default-check@:>@])],
++  [build tiff support <:@default-check@:>@])],
 +  [],
 +  [with_tiff=check])
 +
 +AS_IF([test "x$with_tiff" != "xno"],
 +  [AC_CHECK_HEADER([tiffio.h],
 +    [AC_CHECK_LIB([tiff], [TIFFSetErrorHandler])])])
+ AC_CHECK_HEADER(tiffio.h,
+   AC_CHECK_LIB(tiff, TIFFSetErrorHandler))
  have_tiff=${ac_cv_lib_tiff_TIFFSetErrorHandler:-no}
  
 -PKG_CHECK_MODULES(LIBPNG, libpng,
@@ -68,7 +82,7 @@ diff -urN ufraw-0.18.old/configure.ac ufraw-0.18/configure.ac
 -  [ have_cfitsio=no
 -    AC_MSG_RESULT($CFITSIO_PKG_ERRORS) ] )
 -
--PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.18.1,
+-PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.20,
 -  [ have_exiv2=yes
 -    AC_DEFINE(HAVE_EXIV2, 1, have the exiv2 library) ],
 -  [ have_exiv2=no
@@ -115,7 +129,7 @@ diff -urN ufraw-0.18.old/configure.ac ufraw-0.18/configure.ac
 +
 +have_exiv2=no
 +AS_IF([test "x$with_exiv2" != xno],
-+  [PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.16,
++  [PKG_CHECK_MODULES(EXIV2, exiv2 >= 0.20,
 +    [ have_exiv2=yes
 +      AC_DEFINE(HAVE_EXIV2, 1, have the exiv2 library) ],
 +    [ have_exiv2=no

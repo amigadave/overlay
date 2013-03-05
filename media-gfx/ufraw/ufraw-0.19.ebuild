@@ -1,8 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI=5
 
 inherit fdo-mime gnome2-utils eutils autotools
 
@@ -12,16 +12,16 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~x86-freebsd ~amd64-linux ~x86-linux ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64  ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~x64-solaris ~x86-solaris"
 IUSE="bzip2 contrast exif fits gimp gnome gtk jpeg lensfun openmp png tiff timezone zlib"
 
-RDEPEND="
-	dev-libs/glib
-	=media-libs/lcms-1*
+RDEPEND="dev-libs/glib:2
+	media-libs/lcms:0
 	bzip2? ( app-arch/bzip2 )
-	exif? ( >=media-gfx/exiv2-0.16 )
+	exif? ( >=media-gfx/exiv2-0.20 )
 	fits? ( sci-libs/cfitsio )
-	gnome? ( gnome-base/gconf >=x11-misc/shared-mime-info-0.21 )
+	gnome? ( >=gnome-base/gconf-2
+		>=x11-misc/shared-mime-info-0.21 )
 	gtk? ( >=x11-libs/gtk+-2.6:2
 		>=media-gfx/gtkimageview-1.6.0 )
 	gimp? ( >=x11-libs/gtk+-2.6:2
@@ -34,7 +34,7 @@ RDEPEND="
 	zlib? ( sys-libs/zlib )"
 DEPEND="${RDEPEND}
 	dev-lang/perl
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-no-automagics.patch
@@ -42,9 +42,6 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
-	use gimp && myconf="--with-gtk"
-
 	econf \
 		--without-cinepaint \
 		$(use_with bzip2) \
@@ -61,13 +58,12 @@ src_configure() {
 		$(use_with tiff) \
 		$(use_enable timezone dst-correction) \
 		$(use_with zlib) \
-		${myconf}
+		$(usex gimp --with-gtk "")
 }
 
 src_install() {
-	emake DESTDIR="${D}" schemasdir="${EPREFIX}"/etc/gconf/schemas install \
-		|| die
-	dodoc MANIFEST README TODO || die
+	emake DESTDIR="${D}" schemasdir="${EPREFIX}"/etc/gconf/schemas install
+	dodoc MANIFEST README TODO 
 	if use gnome; then
 		gnome2_gconf_savelist
 	fi
@@ -75,6 +71,7 @@ src_install() {
 
 pkg_postinst() {
 	if use gnome; then
+		fdo-mime_mime_database_update
 		fdo-mime_desktop_database_update
 		gnome2_gconf_install
 	fi
@@ -84,5 +81,6 @@ pkg_postrm() {
 	if use gnome; then
 		gnome2_gconf_uninstall
 		fdo-mime_desktop_database_update
+		fdo-mime_mime_database_update
 	fi
 }
