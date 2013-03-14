@@ -37,7 +37,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-no-automagics.patch
+	epatch "${FILESDIR}"/${PN}-0.19-no-automagics.patch
 	eautoreconf
 }
 
