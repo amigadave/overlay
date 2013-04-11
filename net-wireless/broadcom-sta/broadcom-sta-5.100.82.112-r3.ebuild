@@ -54,6 +54,7 @@ src_prepare() {
 		"${FILESDIR}/${PN}-5.100.82.112-linux-3.2.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-linux-3.4.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-linux-3.6.patch" \
+		"${FILESDIR}/${PN}-5.100.82.112-linux-3.8.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-rename-to-wlan0.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-user_ioctl.patch"
 }
