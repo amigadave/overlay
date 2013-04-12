@@ -37,7 +37,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-0.19-no-automagics.patch
+	epatch "${FILESDIR}"/${P}-no-automagics.patch
 	eautoreconf
 }
 
@@ -55,7 +55,7 @@ src_configure() {
 		$(use_enable gnome mime) \
 		$(use_enable openmp) \
 		$(use_with png libpng) \
-		$(use_with tiff) \
+		$(use_with tiff libtiff) \
 		$(use_enable timezone dst-correction) \
 		$(use_with zlib) \
 		$(usex gimp --with-gtk "")

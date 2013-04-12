@@ -1,35 +1,32 @@
-diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
---- ufraw-0.19.old/configure.ac	2013-02-23 21:26:34.000000000 +0000
-+++ ufraw-0.19/configure.ac	2013-03-05 21:57:37.038562566 +0000
-@@ -226,50 +226,119 @@
- AC_CHECK_FUNCS(memmem)
+--- ufraw-0.19.2.old/configure.ac	2013-03-25 02:40:46.000000000 +0000
++++ ufraw-0.19.2/configure.ac	2013-04-12 12:21:55.964670888 +0100
+@@ -169,57 +169,120 @@
+ AC_SUBST(CINEPAINT_PROGRAMPLUGINDIR)
  
  # Check for zlib.
 -AC_CHECK_LIB(z, deflate)
--have_zlib=${ac_cv_lib_z_deflate:-no}
 +AC_ARG_WITH([zlib],
 +  [AS_HELP_STRING([--with-zlib],
 +  [build zlib support <:@default=check@:>@])],
 +  [],
 +  [with_zlib=check])
- 
++
 +AS_IF([test "x$with_zlib" != "xno"],
 +  [AC_CHECK_LIB([z], [deflate])])
-+have_zlib=${ac_cv_lib_z_deflate:-no}
-+ 
- # Check for libbz2
+ have_zlib=${ac_cv_lib_z_deflate:-no}
+ 
+ # Check for libbz2.
 -AC_CHECK_LIB(bz2, BZ2_bzReadOpen)
--have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
 +AC_ARG_WITH([bzip2],
-+  [AS_HELP_STRING([--with-bzip2],
++  [AS_HELP_STRING([--with-bzip2], 
 +  [build bzip2 support <:@default=check@:>@])],
 +  [],
-+  [with_bzip2=check])
- 
++  [with_bzip2=check]) 
++
 +AS_IF([test "x$with_bzip2" != "xno"],
 +  [AC_CHECK_LIB([bz2], [BZ2_bzReadOpen])])
-+have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
-+ 
+ have_libbz2=${ac_cv_lib_bz2_BZ2_bzReadOpen:-no}
+ 
  # Check for jpeg headers and library.
 -AC_CHECK_HEADER(jpeglib.h,
 -  AC_CHECK_LIB(jpeg, jpeg_CreateCompress))
@@ -57,20 +54,18 @@ diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
  have_jasper=${ac_cv_lib_jasper_jas_image_decode:-no}
  
  # Check for tiff headers and library.
-+AC_ARG_WITH([tiff],
-+  [AS_HELP_STRING([--with-tiff],
-+  [build tiff support <:@default-check@:>@])],
-+  [],
-+  [with_tiff=check])
-+
-+AS_IF([test "x$with_tiff" != "xno"],
-+  [AC_CHECK_HEADER([tiffio.h],
-+    [AC_CHECK_LIB([tiff], [TIFFSetErrorHandler])])])
- AC_CHECK_HEADER(tiffio.h,
-   AC_CHECK_LIB(tiff, TIFFSetErrorHandler))
- have_tiff=${ac_cv_lib_tiff_TIFFSetErrorHandler:-no}
- 
--PKG_CHECK_MODULES(LIBPNG, libpng,
+-PKG_CHECK_MODULES(LIBTIFF, libtiff-4,
+-  [ have_tiff=yes
+-    AC_DEFINE(HAVE_LIBTIFF, 1, have the tiff library) ],
+-  [ have_tiff=no
+-    AC_MSG_RESULT($LIBTIFF_PKG_ERRORS) ] )
+-if test $have_tiff = no; then
+-  AC_CHECK_HEADER(tiffio.h,
+-    AC_CHECK_LIB(tiff, TIFFSetErrorHandler))
+-  have_tiff=${ac_cv_lib_tiff_TIFFSetErrorHandler:-no}
+-fi
+-
+-PKG_CHECK_MODULES(LIBPNG, libpng >= 1.2,
 -  [ have_png=yes
 -    AC_DEFINE(HAVE_LIBPNG, 1, have the png library) ],
 -  [ have_png=no
@@ -93,6 +88,20 @@ diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
 -    AC_DEFINE(HAVE_LENSFUN, 1, have the lensfun library) ],
 -  [ have_lensfun=no
 -    AC_MSG_RESULT($LENSFUN_PKG_ERRORS) ] )
++AC_ARG_WITH([libtiff],
++  [AS_HELP_STRING([--with-libtiff],
++  [build libtiff support <:@default=check@:>@])],
++  [],
++  [with_libtiff=check])
++
++have_libtiff=no
++AS_IF([test "x$with_libtiff" != xno],
++  [PKG_CHECK_MODULES(LIBTIFF, libtiff-4,
++    [ have_libtiff=yes
++      AC_DEFINE(HAVE_LIBTIFF, 1, have the tiff library) ],
++    [ have_libtiff=no
++      AC_MSG_RESULT($LIBTIFF_PKG_ERRORS)])])
++
 +AC_ARG_WITH([libpng],
 +  [AS_HELP_STRING([--with-libpng],
 +  [build libpng support <:@default=check@:>@])],
@@ -101,7 +110,7 @@ diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
 +
 +have_png=no
 +AS_IF([test "x$with_libpng" != xno],
-+  [PKG_CHECK_MODULES(LIBPNG, libpng,
++  [PKG_CHECK_MODULES(LIBPNG, libpng >= 1.2,
 +    [ have_png=yes
 +      AC_DEFINE(HAVE_LIBPNG, 1, have the png library) ],
 +    [ have_png=no
@@ -149,5 +158,5 @@ diff -urN ufraw-0.19.old/configure.ac ufraw-0.19/configure.ac
 +    [ have_lensfun=no
 +      AC_MSG_RESULT($LENSFUN_PKG_ERRORS)])])
  
- # UFRAW_CPPFLAGS is added to the preprocessor flags AM_CPPFLAGS,
- # affecting also the C and C++ compilers.
+ # Make sure MSGFMT_OPTS is defined for all combinations of autoconf and glib.
+ MSGFMT_OPTS=
