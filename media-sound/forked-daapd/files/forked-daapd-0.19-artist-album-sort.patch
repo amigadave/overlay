@@ -1,0 +1,38 @@
+From 6c7fa8f299a8c89a9e56dacfb5a4f58326a9b420 Mon Sep 17 00:00:00 2001
+From: Thijs Reus <thijs.reus@gmail.com>
+Date: Mon, 10 Dec 2012 22:07:31 +0100
+Subject: [PATCH] Now artists/albums are properly sorted and grouped
+
+---
+ src/db.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/db.c b/src/db.c
+index fc7b393..c7983c6 100644
+--- a/src/db.c
++++ b/src/db.c
+@@ -1145,16 +1145,16 @@ struct playlist_info *
+ 
+   if (idx && qp->filter)
+     query = sqlite3_mprintf("SELECT DISTINCT f.%s, f.%s FROM files f WHERE f.data_kind = 0 AND f.disabled = 0 AND f.%s != ''"
+-			    " AND %s %s;", field, field, field, qp->filter, idx);
++			    " AND %s ORDER BY f.%s %s;", field, field, field, qp->filter, field, idx);
+   else if (idx)
+     query = sqlite3_mprintf("SELECT DISTINCT f.%s, f.%s FROM files f WHERE f.data_kind = 0 AND f.disabled = 0 AND f.%s != ''"
+-			    " %s;", field, field, field, idx);
++			    " ORDER BY f.%s %s;", field, field, field, field, idx);
+   else if (qp->filter)
+     query = sqlite3_mprintf("SELECT DISTINCT f.%s, f.%s FROM files f WHERE f.data_kind = 0 AND f.disabled = 0 AND f.%s != ''"
+-			    " AND %s;", field, field, field, qp->filter);
++			    " AND %s ORDER BY f.%s;", field, field, field, qp->filter, field);
+   else
+-    query = sqlite3_mprintf("SELECT DISTINCT f.%s, f.%s FROM files f WHERE f.data_kind = 0 AND f.disabled = 0 AND f.%s != ''",
+-			    field, field, field);
++    query = sqlite3_mprintf("SELECT DISTINCT f.%s, f.%s FROM files f WHERE f.data_kind = 0 AND f.disabled = 0 AND f.%s != '' ORDER BY f.%s",
++			    field, field, field, field);
+ 
+   if (!query)
+     {
+-- 
+1.8.1.6
+

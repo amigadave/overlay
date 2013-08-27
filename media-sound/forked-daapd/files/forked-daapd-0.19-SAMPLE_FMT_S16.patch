@@ -1,0 +1,34 @@
+From fa965dee75fc0644c81b345196b3d0738b5da983 Mon Sep 17 00:00:00 2001
+From: ejurgensen <espenjurgensen@gmail.com>
+Date: Fri, 24 May 2013 20:33:26 +0200
+Subject: [PATCH] Changed SAMPLE_FMT_S16 for ffmpeg 0.11
+
+---
+ src/transcode.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/transcode.c b/src/transcode.c
+index feb2ccb..f5bbd6b 100644
+--- a/src/transcode.c
++++ b/src/transcode.c
+@@ -426,7 +426,7 @@ struct transcode_ctx *
+       goto setup_fail_codec;
+     }
+ 
+-  if ((ctx->acodec->sample_fmt != SAMPLE_FMT_S16)
++  if ((ctx->acodec->sample_fmt != AV_SAMPLE_FMT_S16)
+       || (ctx->acodec->channels != 2)
+       || (ctx->acodec->sample_rate != 44100))
+     {
+@@ -434,7 +434,7 @@ struct transcode_ctx *
+ 
+       ctx->resample_ctx = av_audio_resample_init(2,              ctx->acodec->channels,
+ 						 44100,          ctx->acodec->sample_rate,
+-						 SAMPLE_FMT_S16, ctx->acodec->sample_fmt,
++						 AV_SAMPLE_FMT_S16, ctx->acodec->sample_fmt,
+ 						 16, 10, 0, 0.8);
+ 
+       if (!ctx->resample_ctx)
+-- 
+1.8.1.6
+

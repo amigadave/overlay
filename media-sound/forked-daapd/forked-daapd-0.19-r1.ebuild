@@ -40,6 +40,9 @@ RESTRICT="primaryuri"
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-0.12-configure.patch"
+	epatch "${FILESDIR}/${PN}-0.19-artist-album-sort.patch"
+	epatch "${FILESDIR}/${PN}-0.19-remove-avcodec_init.patch"
+	epatch "${FILESDIR}/${PN}-0.19-SAMPLE_FMT_S16.patch"
 	eautoreconf
 }
 
