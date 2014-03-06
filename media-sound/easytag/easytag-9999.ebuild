@@ -9,7 +9,7 @@ inherit eutils git-2 autotools gnome.org gnome2
 EGIT_REPO_URI="git://git.gnome.org/easytag"
 
 DESCRIPTION="GTK+ utility for editing MP2, MP3, MP4, FLAC, Ogg and other media tags"
-HOMEPAGE="http://projects.gnome.org/easytag/"
+HOMEPAGE="https://wiki.gnome.org/Apps/EasyTAG"
 SRC_URI=""
 
 LICENSE="GPL-2+"
@@ -37,6 +37,7 @@ DEPEND="${RDEPEND}
 	app-text/docbook-xml-dtd:4.4
 	app-text/yelp-tools
 	>=dev-util/intltool-0.50.0
+	dev-util/appdata-tools
 	>=sys-devel/autoconf-2.54
 	>=sys-devel/automake-1.11
 	virtual/pkgconfig
