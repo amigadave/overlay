@@ -15,9 +15,9 @@ SRC_URI=""
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="flac mp3 mp4 nls speex vorbis wavpack"
+IUSE="flac mp3 mp4 nls opus speex vorbis wavpack"
 
-RDEPEND=">=x11-libs/gtk+-2.24:2
+RDEPEND=">=x11-libs/gtk+-3.4:3
 	mp3? (
 		>=media-libs/id3lib-3.8.3-r7
 		media-libs/libid3tag
@@ -27,6 +27,10 @@ RDEPEND=">=x11-libs/gtk+-2.24:2
 		media-libs/libvorbis
 		)
 	mp4? ( media-libs/taglib[mp4] )
+	opus? (
+		media-libs/opus
+		media-libs/opusfile
+	)
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	speex? (
@@ -57,6 +61,7 @@ src_configure() {
 		$(use_enable mp3) \
 		$(use_enable mp3 id3v23) \
 		$(use_enable vorbis ogg) \
+		$(use_enable opus) \
 		$(use_enable speex) \
 		$(use_enable flac) \
 		$(use_enable mp4) \
