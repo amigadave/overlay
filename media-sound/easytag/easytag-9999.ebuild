@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="flac mp3 mp4 nls opus speex vorbis wavpack"
+IUSE="flac mp3 mp4 nautilus nls opus speex vorbis wavpack"
 
 RDEPEND=">=x11-libs/gtk+-3.4:3
 	mp3? (
@@ -27,6 +27,7 @@ RDEPEND=">=x11-libs/gtk+-3.4:3
 		media-libs/libvorbis
 		)
 	mp4? ( media-libs/taglib[mp4] )
+	nautilus? ( gnome-base/nautilus )
 	opus? (
 		media-libs/opus
 		media-libs/opusfile
@@ -60,6 +61,7 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_enable mp3) \
 		$(use_enable mp3 id3v23) \
+		$(use_enable nautilus nautilus-actions ) \
 		$(use_enable vorbis ogg) \
 		$(use_enable opus) \
 		$(use_enable speex) \
